@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arushi Gupta - 3D Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #123524; /* Dark green background */
+            /* Updated subtle noise texture for a smoother look */
+            background-image: url('https://image.freepik.com/free-photo/green-grass-background-textured_3236-1357.jpg');
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .content-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .text-box {
+            background-color: rgba(18, 53, 36, 0.7); /* Unified background color */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Added transition */
+        }
+
+        .text-box:hover {
+            transform: translateY(-10px) rotateX(3deg); /* 3D lift effect */
+            box-shadow: 0 15px 30px rgba(255, 136, 171, 0.15);
+        }
+
+        .text-box h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ff8fab; /* Soft pink */
+            text-shadow: 0 0 8px rgba(255, 136, 171, 0.6); /* Glow effect */
+        }
+        
+        .text-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            color: #f0b3c7;
+            text-shadow: 0 0 6px rgba(240, 179, 199, 0.5); /* Softer glow for h2 */
+        }
+
+        .text-box p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #eee;
+        }
+
+        .experience-stat {
+            color: #ffc2d4;
+            font-weight: 600;
+            text-shadow: 0 0 6px rgba(255, 136, 171, 0.7);
+        }
+        
+        .scroll-container {
+            height: 900vh; /* Adjusted for new project */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Hero Section Layout --- */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+        }
+        .hero-text {
+            flex: 2;
+            text-align: left;
+        }
+        .hero-image-container {
+            flex: 1;
+        }
+        .portrait {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff8fab;
+            box-shadow: 0 0 20px rgba(255, 136, 171, 0.5);
+        }
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+            }
+        }
+
+
+        /* --- Skill Bar Styles --- */
+        .skill-bar-container {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .skill-bar-bg {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            height: 8px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            background: linear-gradient(90deg, #ff8fab, #f0b3c7);
+            height: 100%;
+            width: 0; /* Initial width for animation */
+            border-radius: 9999px;
+            transition: width 1.5s ease-in-out;
+        }
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+        .skill-expertise {
+            color: #f0b3c7;
+            font-weight: 500;
+        }
+
+        /* --- New Project Card Styles --- */
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            width: 100%;
+        }
+        
+        /* --- Gray box for projects section --- */
+        .projects-wrapper {
+            background-color: rgba(18, 53, 36, 0.7); /* Unified background color */
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .project-card {
+            background-color: rgba(18, 53, 36, 0.9); /* Unified and slightly more opaque */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            flex: 1 1 320px;
+            max-width: 400px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(3deg); /* 3D lift effect */
+            box-shadow: 0 15px 30px rgba(255, 136, 171, 0.2);
+        }
+
+        .project-date {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag-pill {
+            background-color: rgba(255, 136, 171, 0.15);
+            color: #ffc2d4;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-box {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .stat-box .stat-value {
+            display: block;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Glow effect for stats */
+        }
+
+        .stat-box .stat-label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .project-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, #ff8fab, #e3649b);
+            color: #fff;
+            margin-top: auto;
+        }
+
+        .project-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 136, 171, 0.4);
+        }
+
+        /* --- Contact Button Styles --- */
+        .contact-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #ff8fab;
+            border-radius: 9999px;
+            color: #ff8fab;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .contact-button:hover {
+            background-color: #ff8fab;
+            color: #111;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 136, 171, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="scroll-container">
+        <!-- Hero Section -->
+        <div class="content-section">
+            <div class="text-box hero-container">
+                <div class="hero-text">
+                    <h1>Arushi Gupta</h1>
+                    <p>
+                        <strong>AI/ML Engineer & Computer Engineering Student at Purdue</strong>
+                        <br><br>
+                        Passionate about building intelligent systems that solve real-world problems. Currently pursuing B.S. Computer and Electrical Engineering, specializing in AI workflows, neural networks, and data analysis.
+                        <br><br>
+                        <strong>Location:</strong> West Lafayette, Indiana
+                    </p>
+                </div>
+                <div class="hero-image-container">
+                    <!-- REPLACE THIS SRC WITH THE URL TO YOUR PORTRAIT -->
+                    <img src="https://cdn.corenexis.com/file/?serve=6229193168.png&token=a4b5f69d5cc26514a7f1f7b6cd3c0e078f0ebe266410f7742e993f2cea65be64.NjIyOTE5MzE2OC5wbmd8MTc1NDAyMTc3NA==" alt="A portrait of Arushi Gupta" class="portrait">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Experience Section -->
+        <div class="content-section">
+            <div class="text-box">
+                <h1>Experience</h1>
+                <h2>Agentic AI Intern @ ReVenture</h2>
+                <p>
+                    <em>May 2025 - August 2025</em><br>
+                    Designed AI workflows using n8n, increasing operational efficiency by <span class="experience-stat">30%</span>. Developed AI agents for grant writing, helping secure <span class="experience-stat">$250K</span> in funding.
+                </p>
+                <h2>Generative AI Model Trainer @ Outlier AI</h2>
+                <p>
+                    <em>May 2024 - August 2024</em><br>
+                    Trained AI models evaluating <span class="experience-stat">500+</span> weekly responses with <span class="experience-stat">70%</span> accuracy. Specialized in mathematics and Python programming validation.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Projects Section -->
+        <div class="content-section">
+            <div class="w-full max-w-7xl projects-wrapper">
+                <h1 class="text-center text-4xl mb-12" style="font-family: 'Playfair Display', serif; color: #ff8fab; font-weight: 700; text-shadow: 0 0 8px rgba(255, 136, 171, 0.6);">Featured Projects</h1>
+                <div class="projects-container">
+                    <!-- Project Card 1 -->
+                    <div class="project-card">
+                        <p class="project-date">JUNE 2025</p>
+                        <h2 class="project-title">Sentiment Analysis Neural Network</h2>
+                        <div class="project-tags">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">TensorFlow</span>
+                            <span class="tag-pill">Keras</span>
+                        </div>
+                        <p class="project-description">Built end-to-end deep learning pipeline processing 20,000+ text samples, achieving 85% accuracy in sentiment classification.</p>
+                        <div class="project-stats-grid">
+                            <div class="stat-box"><span class="stat-value" data-target="85" data-suffix="%">0%</span><span class="stat-label">Accuracy</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="20" data-suffix="k+">0k+</span><span class="stat-label">Samples</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="30">0</span><span class="stat-label">Epochs</span></div>
+                        </div>
+                        <a href="https://github.com/i4rushi" target="_blank" rel="noopener noreferrer" class="project-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <span>View Code</span>
+                        </a>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="project-card">
+                         <p class="project-date">MAY 2024</p>
+                        <h2 class="project-title">NYC Bicycle Traffic Analysis</h2>
+                        <div class="project-tags">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">Pandas</span>
+                            <span class="tag-pill">Scikit-learn</span>
+                        </div>
+                        <p class="project-description">Analyzed bike routes across 4 NYC bridges, developed weather-based regression mode.</p>
+                        <div class="project-stats-grid">
+                            <div class="stat-box"><span class="stat-value" data-special="R²=0.86">R²=0</span><span class="stat-label">Model Score</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="214">0</span><span class="stat-label">Observations</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="4">0</span><span class="stat-label">Bridges</span></div>
+                        </div>
+                         <a href="https://github.com/i4rushi" target="_blank" rel="noopener noreferrer" class="project-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <span>View Code</span>
+                        </a>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="project-card">
+                         <p class="project-date">APRIL 2024</p>
+                        <h2 class="project-title">Agricultural Data Analytics</h2>
+                        <div class="project-tags">
+                            <span class="tag-pill">Python</span>
+                            <span class="tag-pill">Pandas</span>
+                            <span class="tag-pill">Matplotlib</span>
+                        </div>
+                        <p class="project-description">Integrated 16 years of agricultural data across 170+ million acres, identifying up to 17% year-over-year crop acreage variations for climate impact assessment.</p>
+                        <div class="project-stats-grid">
+                            <div class="stat-box"><span class="stat-value" data-target="16">0</span><span class="stat-label">Years Data</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="170" data-suffix="M+">0M+</span><span class="stat-label">Acres</span></div>
+                            <div class="stat-box"><span class="stat-value" data-target="17" data-suffix="%">0%</span><span class="stat-label">Variation</span></div>
+                        </div>
+                         <a href="https://github.com/i4rushi" target="_blank" rel="noopener noreferrer" class="project-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <span>View Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Skills Section -->
+        <div class="content-section">
+            <div class="text-box">
+                <h1>Technical Expertise</h1>
+                <!-- Languages -->
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>Python</span><span class="skill-expertise">Expert</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="95%"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>C/C++</span><span class="skill-expertise">Advanced</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="80%"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>HTML/CSS</span><span class="skill-expertise">Advanced</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="80%"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-label"><span>JavaScript</span><span class="skill-expertise">Intermediate</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="60%"></div></div>
+                </div>
+                <!-- Frameworks -->
+                <h2 class="mt-8">AI/ML Frameworks</h2>
+                 <div class="skill-bar-container">
+                    <div class="skill-label"><span>TensorFlow</span><span class="skill-expertise">Expert</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="95%"></div></div>
+                </div>
+                 <div class="skill-bar-container">
+                    <div class="skill-label"><span>Keras</span><span class="skill-expertise">Expert</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="90%"></div></div>
+                </div>
+                 <div class="skill-bar-container">
+                    <div class="skill-label"><span>Scikit-learn</span><span class="skill-expertise">Advanced</span></div>
+                    <div class="skill-bar-bg"><div class="skill-bar-fill" data-level="80%"></div></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="content-section">
+            <div class="text-box">
+                <h1>Get In Touch</h1>
+                <p>
+                    I'd love to connect! Feel free to reach out for collaborations, internship opportunities, or to discuss innovative projects.
+                </p>
+                <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                    <a href="mailto:gupt1077@purdue.edu" class="contact-button">Email</a>
+                    <a href="https://linkedin.com/in/arushig05" target="_blank" rel="noopener noreferrer" class="contact-button">LinkedIn</a>
+                    <a href="https://github.com/i4rushi" target="_blank" rel="noopener noreferrer" class="contact-button">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // --- Basic Scene Setup ---
+        let scene, camera, renderer;
+        let particleSystem1, particleSystem2; // Declare particle systems globally
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x123524, 0.02); // Adjusted fog to match background
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 1;
+
+            // Renderer
+            const canvas = document.getElementById('bg-canvas');
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // --- Lighting ---
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xffc0cb, 1, 100);
+            pointLight.position.set(0, 10, 5);
+            scene.add(pointLight);
+
+            // --- Flower Particles ---
+            const textureLoader = new THREE.TextureLoader();
+            
+            // First flower system (Pink)
+            const particleTexture1 = textureLoader.load('https://static.vecteezy.com/system/resources/previews/024/856/595/original/pink-sakura-flower-isolated-on-transparent-background-ai-generated-free-png.png'); 
+            const particles1 = createParticleSystem(3500, particleTexture1, 0.4);
+            particleSystem1 = particles1;
+            scene.add(particleSystem1);
+
+            // Second flower system (White)
+            const particleTexture2 = textureLoader.load('https://static.vecteezy.com/system/resources/previews/024/856/595/original/pink-sakura-flower-isolated-on-transparent-background-ai-generated-free-png.png');
+            const particles2 = createParticleSystem(3500, particleTexture2, 0.3);
+            particleSystem2 = particles2;
+            scene.add(particleSystem2);
+            
+            // --- Event Listeners ---
+            window.addEventListener('resize', onWindowResize, false);
+            window.addEventListener('scroll', onScroll, false);
+
+            // --- Initial Render ---
+            animate();
+            
+            // --- Setup Animations ---
+            setupSkillBarAnimation();
+            setupStatAnimation();
+        }
+
+        function createParticleSystem(count, texture, size) {
+            const particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(count * 3);
+
+            for (let i = 0; i < count * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 20;
+            }
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: size,
+                map: texture,
+                blending: THREE.NormalBlending,
+                transparent: true,
+                depthWrite: false,
+            });
+
+            return new THREE.Points(particles, particleMaterial);
+        }
+
+        // --- Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = Date.now() * 0.00005;
+            
+            // Animate particles for a subtle floating effect
+            if (particleSystem1) {
+                particleSystem1.rotation.y = time * 0.2;
+                particleSystem1.rotation.x = time * 0.1;
+            }
+            if (particleSystem2) {
+                particleSystem2.rotation.y = -time * 0.15;
+                particleSystem2.rotation.x = -time * 0.12;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // --- Event Handlers ---
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onScroll() {
+            const scrollPercent = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+            
+            // Move camera forward on scroll
+            camera.position.z = 1 - scrollPercent * 15;
+            camera.position.y = scrollPercent * 2; // slight lift
+            camera.rotation.x = -scrollPercent * 0.2;
+        }
+
+        // --- Skill Bar Animation on Scroll ---
+        function setupSkillBarAnimation() {
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const level = bar.getAttribute('data-level');
+                        bar.style.width = level;
+                        observer.unobserve(bar); // Animate only once
+                    }
+                });
+            }, {
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            });
+
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+        }
+        
+        // --- Stat Count-Up Animation ---
+        function setupStatAnimation() {
+            const statElements = document.querySelectorAll('.stat-value');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const special = el.dataset.special;
+
+                        if (special) {
+                            el.textContent = special;
+                            observer.unobserve(el);
+                            return;
+                        }
+                        
+                        const target = +el.dataset.target;
+                        const suffix = el.dataset.suffix || '';
+                        
+                        let current = 0;
+                        const duration = 1500; // 1.5 seconds
+                        const stepTime = 20; // update every 20ms
+                        const steps = duration / stepTime;
+                        const increment = target / steps;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                clearInterval(timer);
+                                el.textContent = target + suffix;
+                            } else {
+                                el.textContent = Math.ceil(current) + suffix;
+                            }
+                        }, stepTime);
+
+                        observer.unobserve(el); // Animate only once
+                    }
+                });
+            }, {
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            });
+
+            statElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+
+        // --- Start Everything ---
+        init();
+
+    </script>
+</body>
+</html>
