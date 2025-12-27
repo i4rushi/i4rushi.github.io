@@ -1,96 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arushi Gupta | AI & ML Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        dark: '#0f172a',
-                        card: '#1e293b',
-                        primary: '#22d3ee', // Cyan
-                        secondary: '#a855f7', // Purple
-                        accent: '#f43f5e', // Rose for Wow Factor
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Animations */
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arushi Gupta | AI & ML Engineer</title>
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            dark: '#0f172a',
+            card: '#1e293b',
+            primary: '#22d3ee',
+            secondary: '#a855f7',
+            accent: '#f43f5e',
+          }
         }
-        
-        .gradient-text {
-            background: linear-gradient(to right, #22d3ee, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
 </head>
-<body class="bg-dark text-slate-300 font-sans selection:bg-primary selection:text-dark">
 
-    <nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white tracking-tighter">AG<span class="text-primary">.</span></a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-primary transition-colors">About</a>
-                <a href="#experience" class="hover:text-primary transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-primary transition-colors">Work</a>
-                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
-            </div>
-            <a href="https://github.com/i4rushi" target="_blank" class="text-xl hover:text-white transition-colors"><i class="fab fa-github"></i></a>
-        </div>
-    </nav>
+<body class="bg-dark text-slate-300 font-sans">
 
-    <section class="min-h-screen flex items-center justify-center pt-16 px-6 relative overflow-hidden">
-        <div class="absolute top-20 right-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+<!-- ================= NAV ================= -->
+<nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md border-b border-slate-800">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-white">AG<span class="text-primary">.</span></a>
 
-        <div class="max-w-4xl text-center fade-in-up">
-            <p class="text-primary font-semibold mb-4 tracking-wide uppercase text-sm">Aspiring Computer Engineer @ Purdue</p>
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                Building <span class="gradient-text">Intelligent Systems</span> <br> & Scalable Data Pipelines.
-            </h1>
-            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-                I bridge the gap between rigorous Data Structures logic and modern Deep Learning applications. Expert in LLM Fine-tuning, Computer Vision, and Automated Workflows.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#projects" class="px-8 py-4 bg-primary text-dark font-bold rounded-full hover:bg-cyan-300 transition-all transform hover:scale-105 shadow-lg shadow-primary/25">
-                    View My Work
-                </a>
-                <a href="ArushiGupta_Resume2025.pdf" class="px-8 py-4 border border-slate-600 text-white font-semibold rounded-full hover:border-white transition-all">
-                    Download Resume
-                </a>
-            </div>
-        </div>
-    </section>
+    <div class="hidden md:flex space-x-8 items-center">
+      <a href="#about" class="hover:text-primary">About</a>
+      <a href="#experience" class="hover:text-primary">Experience</a>
+      <a href="#projects" class="hover:text-primary">Work</a>
+      <a href="#contact" class="hover:text-primary">Contact</a>
 
-    <section id="about" class="py-20 px-6 bg-dark">
+      <!-- ✅ Gesture Scroll Toggle -->
+      <button
+        id="cvToggle"
+        class="px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary/10 transition font-semibold text-sm"
+      >
+        Try Gesture Scroll
+      </button>
+    </div>
+
+    <a href="https://github.com/i4rushi" target="_blank" class="text-xl hover:text-white">
+      <i class="fab fa-github"></i>
+    </a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="min-h-screen flex items-center justify-center pt-16 px-6">
+  <div class="max-w-4xl text-center fade-in-up">
+    <p class="text-primary font-semibold mb-4 uppercase text-sm">
+      Aspiring Computer Engineer @ Purdue
+    </p>
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+      Building <span class="gradient-text">Intelligent Systems</span>
+    </h1>
+    <p class="text-xl text-slate-400 mb-10">
+      AI, Computer Vision, and Scalable ML Systems
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTENT (UNCHANGED) ================= -->
+<section id="about" class="py-20 px-6 bg-dark">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
             <div class="fade-in-up delay-100">
                 <h2 class="text-3xl font-bold text-white mb-6"><span class="text-primary">01.</span> About Me</h2>
@@ -364,16 +366,121 @@
         <p class="text-slate-600 text-sm">© 2025 Arushi Gupta. Built with Tailwind CSS.</p>
     </footer>
 
+<!-- ================= FLOATING CV PANEL ================= -->
+<div
+  id="cvPanel"
+  class="fixed bottom-4 right-4 w-64 bg-black/80 border border-primary rounded-lg shadow-lg hidden z-50"
+>
+  <div class="flex justify-between items-center px-3 py-2 border-b border-slate-700">
+    <span class="text-sm text-primary font-semibold">Gesture Tracking</span>
+    <button id="cvClose" class="text-slate-400 hover:text-white">✕</button>
+  </div>
+
+  <div class="relative">
+    <video
+      id="video"
+      class="w-full h-40 object-cover rounded-b-lg"
+      autoplay
+      muted
+      playsinline
+    ></video>
+
+    <canvas
+      id="overlay"
+      class="absolute top-0 left-0 w-full h-40 pointer-events-none"
+    ></canvas>
+  </div>
+
+  <div class="px-3 py-2 text-xs text-slate-300">
+    ☝️ Move index finger to scroll<br>
+    🤏 Pinch to pause
+  </div>
+</div>
+
+<!-- ================= MEDIAPIPE ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
+<!-- ================= GESTURE LOGIC ================= -->
+<script>
+const toggleBtn = document.getElementById("cvToggle");
+const panel = document.getElementById("cvPanel");
+const closeBtn = document.getElementById("cvClose");
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("overlay");
+const ctx = canvas.getContext("2d");
+
+let camera = null;
+let prevY = null;
+let enabled = false;
+
+const hands = new Hands({
+  locateFile: file =>
+    `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+});
+
+hands.setOptions({
+  maxNumHands: 1,
+  modelComplexity: 1,
+  minDetectionConfidence: 0.7,
+  minTrackingConfidence: 0.7
+});
+
+hands.onResults(onResults);
+
+toggleBtn.onclick = () => {
+  panel.classList.remove("hidden");
+  enabled = true;
+
+  camera = new Camera(video, {
+    onFrame: async () => {
+      await hands.send({ image: video });
+    },
+    width: 320,
+    height: 240
+  });
+
+  camera.start();
+};
+
+closeBtn.onclick = () => {
+  panel.classList.add("hidden");
+  enabled = false;
+  prevY = null;
+  if (camera) camera.stop();
+};
+
+function onResults(results) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (!enabled || !results.multiHandLandmarks) return;
+
+  const landmarks = results.multiHandLandmarks[0];
+
+  ctx.fillStyle = "#22d3ee";
+  landmarks.forEach(pt => {
+    ctx.beginPath();
+    ctx.arc(pt.x * canvas.width, pt.y * canvas.height, 4, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  const indexTip = landmarks[8];
+  const thumbTip = landmarks[4];
+
+  const pinching = Math.abs(indexTip.y - thumbTip.y) < 0.03;
+  if (pinching) {
+    prevY = null;
+    return;
+  }
+
+  if (prevY !== null) {
+    const delta = (indexTip.y - prevY) * 1200;
+    window.scrollBy({ top: delta, behavior: "smooth" });
+  }
+
+  prevY = indexTip.y;
+}
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
