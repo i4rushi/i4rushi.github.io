@@ -488,10 +488,11 @@ const hands = new Hands({
     `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
 });
 
+// CHANGE 1: Lowered detection confidence to 0.5 to catch hand faster on re-entry
 hands.setOptions({
   maxNumHands: 1,
   modelComplexity: 1,
-  minDetectionConfidence: 0.7,
+  minDetectionConfidence: 0.5, 
   minTrackingConfidence: 0.7
 });
 
@@ -531,23 +532,34 @@ closeBtn.onclick = () => {
   }
 };
 
-function countFingers(landmarks) {
+// CHANGE 2: Added 'handedness' parameter to support both hands
+function countFingers(landmarks, handedness) {
   let count = 0;
 
   const tipIds = [8, 12, 16, 20];
   const pipIds = [6, 10, 14, 18];
 
+  // 1. Count non-thumb fingers (Vertical Check)
   for (let i = 0; i < tipIds.length; i++) {
     if (landmarks[tipIds[i]].y < landmarks[pipIds[i]].y) {
       count++;
     }
   }
 
-  // Thumb (horizontal check)
+  // 2. Count Thumb (Horizontal Check depends on Left vs Right hand)
   const thumbTip = landmarks[4];
   const thumbIP = landmarks[3];
-  if (thumbTip.x > thumbIP.x) {
-    count++;
+  
+  // MediaPipe "Left" label usually corresponds to the user's Right hand in selfie mode,
+  // but we check the label directly.
+  // "Right" label -> Thumb is on the Left side (x decreases)
+  // "Left" label -> Thumb is on the Right side (x increases)
+  if (handedness === "Right") {
+      // For a Right hand label, thumb tip x should be LESS than knuckle x to be "out"
+      if (thumbTip.x < thumbIP.x) count++;
+  } else {
+      // For a Left hand label, thumb tip x should be GREATER than knuckle x
+      if (thumbTip.x > thumbIP.x) count++;
   }
 
   return count;
@@ -555,10 +567,28 @@ function countFingers(landmarks) {
 
 // ---- Gesture Handler ----
 function onResults(results) {
+  // Clear canvas every frame
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (!enabled || !results.multiHandLandmarks) return;
+
+  if (!enabled) return;
+
+  // CHANGE 3: CRITICAL FIX
+  // Check if landmarks exist AND if the array is empty. 
+  // If empty, reset state and return to prevent crash.
+  if (!results.multiHandLandmarks || results.multiHandLandmarks.length === 0) {
+    label.textContent = "Detected: —";
+    // Optional: Reset trigger so you can re-trigger the same gesture immediately upon re-entry
+    // lastTriggered = null; 
+    return;
+  }
 
   const landmarks = results.multiHandLandmarks[0];
+  
+  // Get handedness (Left vs Right) to fix thumb logic
+  // Safe access because we already checked landmarks.length > 0
+  const handedness = results.multiHandedness && results.multiHandedness[0] 
+                     ? results.multiHandedness[0].label 
+                     : "Left"; // Default fallback
 
   // Draw landmarks
   ctx.fillStyle = "#22d3ee";
@@ -568,7 +598,8 @@ function onResults(results) {
     ctx.fill();
   });
 
-  const fingerCount = countFingers(landmarks);
+  // Pass handedness to the counter
+  const fingerCount = countFingers(landmarks, handedness);
 
   if (fingerCount === 0 || fingerCount > 5) {
     label.textContent = "Detected: —";
@@ -576,6 +607,9 @@ function onResults(results) {
   }
 
   const gesture = sectionMap[fingerCount];
+  // Safety check: ensure gesture exists for this count
+  if (!gesture) return; 
+  
   label.textContent = `Detected: ${gesture.label}`;
 
   if (cooldown || lastTriggered === fingerCount) return;
@@ -601,5 +635,6 @@ function onResults(results) {
 
 </body>
 </html>
+
 
 
