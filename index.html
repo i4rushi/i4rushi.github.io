@@ -422,7 +422,6 @@ const closeBtn = document.getElementById("cvClose");
 const video = document.getElementById("video");
 const canvas = document.getElementById("overlay");
 const ctx = canvas.getContext("2d");
-
 const label = document.getElementById("gestureLabel");
 
 let camera = null;
@@ -471,27 +470,46 @@ toggleBtn.onclick = () => {
   camera.start();
 };
 
-// ---- Disable Gesture Mode ----
+// ---- Disable Gesture Mode (FULL CAMERA SHUTDOWN) ----
 closeBtn.onclick = () => {
   panel.classList.add("hidden");
   enabled = false;
-  lastTriggered = null;
   cooldown = false;
+  lastTriggered = null;
   label.textContent = "Detected: —";
-  if (camera) camera.stop();
+
+  if (camera) {
+    camera.stop();
+    camera = null;
+  }
+
+  if (video.srcObject) {
+    video.srcObject.getTracks().forEach(track => track.stop());
+    video.srcObject = null;
+  }
 };
 
-// ---- Count Fingers (Index → Pinky + Thumb) ----
+// ---- Accurate Finger Counting ----
 function countFingers(landmarks) {
-  const tips = [4, 8, 12, 16, 20];
-  const bases = [2, 6, 10, 14, 18];
-
   let count = 0;
-  for (let i = 0; i < tips.length; i++) {
-    if (landmarks[tips[i]].y < landmarks[bases[i]].y) {
+
+  // Index → Pinky (vertical check)
+  const tipIds = [8, 12, 16, 20];
+  const pipIds = [6, 10, 14, 18];
+
+  for (let i = 0; i < tipIds.length; i++) {
+    if (landmarks[tipIds[i]].y < landmarks[pipIds[i]].y) {
       count++;
     }
   }
+
+  // Thumb (horizontal check)
+  const thumbTip = landmarks[4];
+  const thumbIP = landmarks[3];
+  if (thumbTip.x > thumbIP.x) {
+    count++;
+  }
+
   return count;
 }
 
@@ -512,7 +530,6 @@ function onResults(results) {
 
   const fingerCount = countFingers(landmarks);
 
-  // Ignore invalid gestures
   if (fingerCount === 0 || fingerCount > 5) {
     label.textContent = "Detected: —";
     return;
@@ -521,14 +538,12 @@ function onResults(results) {
   const gesture = sectionMap[fingerCount];
   label.textContent = `Detected: ${gesture.label}`;
 
-  // Debounce navigation
   if (cooldown || lastTriggered === fingerCount) return;
 
   cooldown = true;
   lastTriggered = fingerCount;
 
   if (fingerCount === 5) {
-    // Home (top of page)
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
     const target = document.getElementById(gesture.id);
@@ -543,7 +558,9 @@ function onResults(results) {
 }
 </script>
 
+
 </body>
 </html>
+
 
 
