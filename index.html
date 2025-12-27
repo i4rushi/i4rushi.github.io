@@ -412,11 +412,21 @@ const canvas = document.getElementById("overlay");
 const ctx = canvas.getContext("2d");
 
 let camera = null;
-let prevY = null;
 let enabled = false;
+let lastTriggered = null;
+let cooldown = false;
 
+// Section mapping
+const sectionMap = {
+  1: "about",
+  2: "experience",
+  3: "projects",
+  4: "contact"
+};
+
+// ---- MediaPipe Setup ----
 const hands = new Hands({
-  locateFile: file =>
+  locateFile: (file) =>
     `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
 });
 
@@ -429,6 +439,7 @@ hands.setOptions({
 
 hands.onResults(onResults);
 
+// ---- Enable Gesture Mode ----
 toggleBtn.onclick = () => {
   panel.classList.remove("hidden");
   enabled = true;
@@ -444,19 +455,37 @@ toggleBtn.onclick = () => {
   camera.start();
 };
 
+// ---- Disable Gesture Mode ----
 closeBtn.onclick = () => {
   panel.classList.add("hidden");
   enabled = false;
-  prevY = null;
+  lastTriggered = null;
+  cooldown = false;
   if (camera) camera.stop();
 };
 
+// ---- Utility: Finger Count ----
+function countFingers(landmarks) {
+  const tips = [8, 12, 16, 20]; // index → pinky
+  const bases = [6, 10, 14, 18];
+
+  let count = 0;
+  for (let i = 0; i < tips.length; i++) {
+    if (landmarks[tips[i]].y < landmarks[bases[i]].y) {
+      count++;
+    }
+  }
+  return count;
+}
+
+// ---- Gesture Handler ----
 function onResults(results) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (!enabled || !results.multiHandLandmarks) return;
 
   const landmarks = results.multiHandLandmarks[0];
 
+  // Draw landmarks
   ctx.fillStyle = "#22d3ee";
   landmarks.forEach(pt => {
     ctx.beginPath();
@@ -464,23 +493,29 @@ function onResults(results) {
     ctx.fill();
   });
 
-  const indexTip = landmarks[8];
-  const thumbTip = landmarks[4];
+  const fingerCount = countFingers(landmarks);
 
-  const pinching = Math.abs(indexTip.y - thumbTip.y) < 0.03;
-  if (pinching) {
-    prevY = null;
-    return;
+  // Ignore fist or >4 fingers
+  if (fingerCount === 0 || fingerCount > 4) return;
+
+  // Debounce (prevents rapid jumping)
+  if (cooldown || lastTriggered === fingerCount) return;
+
+  const sectionId = sectionMap[fingerCount];
+  const target = document.getElementById(sectionId);
+
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+    lastTriggered = fingerCount;
+    cooldown = true;
+
+    setTimeout(() => {
+      cooldown = false;
+    }, 1200);
   }
-
-  if (prevY !== null) {
-    const delta = (indexTip.y - prevY) * 1200;
-    window.scrollBy({ top: delta, behavior: "smooth" });
-  }
-
-  prevY = indexTip.y;
 }
 </script>
 
 </body>
 </html>
+
