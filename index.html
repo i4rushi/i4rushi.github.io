@@ -1,640 +1,68 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arushi Gupta | AI & ML Engineer</title>
+<h1 align="left">Hi, I'm Arushi</h1>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<p align="left">
+  <b>AI Implementation @ Lilly</b> &nbsp;·&nbsp; building agentic AI &amp; LLM systems that ship.
+</p>
 
-  <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['Inter', 'sans-serif'],
-        },
-        colors: {
-          bg: '#05050a',
-          panel: '#0b0f1a',
-          neonPink: '#ff2bdc',
-          neonPurple: '#8b5cf6',
-          neonCyan: '#22d3ee',
-          neonRed: '#ff3b3b',
-          textDim: '#a1a1aa',
-        },
-        boxShadow: {
-          neonPink: '0 0 20px rgba(255,43,220,0.35)',
-          neonCyan: '0 0 20px rgba(34,211,238,0.35)',
-          neonSoft: '0 0 30px rgba(139,92,246,0.25)',
-        },
-      }
-    }
-  }
-</script>
+<p align="left">
+  <img src="https://komarev.com/ghpvc/?username=i4rushi&label=Profile%20views&color=0969da&style=flat" alt="Profile views" />
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=i4rushi.i4rushi&color=1f883d" alt="Visitors" />
+</p>
 
-  <style>
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
+---
 
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+### About me
 
-    .gradient-text {
-      background: linear-gradient(
-        90deg,
-        #ff2bdc,
-        #8b5cf6,
-        #22d3ee
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 12px rgba(255,43,220,0.35));
-    }
-  </style>
-</head>
+I work at the intersection of applied AI and real-world deployment — turning research-grade ideas into systems that run in production. My background runs the full stack: from implementing neural networks and decision trees from scratch, to designing multi-agent LLM systems and standing up the cloud + CI/CD plumbing that keeps them alive.
 
-<body class="bg-bg text-textDim font-sans selection:bg-neonPink selection:text-black">
+- Currently focused on **multi-agent systems, GraphRAG/RAG pipelines, and LLM application engineering**
+- I like understanding things at the implementation level — from BSTs and tail recursion up to RLHF and model evaluation
+- Equally at home in a Python notebook, a Rust toolchain, or a Raspberry Pi
+- **Fun fact:** I've taught a Duckietown robot to drive itself and built ML models from scratch before reaching for a framework
 
-<!-- NAV -->
-<nav class="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-neonPink/20">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="#" class="text-2xl font-bold text-white">
-      AG<span class="text-neonPink">.</span>
-    </a>
+---
 
-    <div class="hidden md:flex space-x-8 items-center">
-      <a href="#about" class="hover:text-neonPink transition">About</a>
-      <a href="#experience" class="hover:text-neonPink transition">Experience</a>
-      <a href="#projects" class="hover:text-neonPink transition">Work</a>
-      <a href="#contact" class="hover:text-neonPink transition">Contact</a>
+### Languages
 
-      <button
-        id="cvToggle"
-        class="px-4 py-2 rounded-md border border-neonPink text-neonPink hover:bg-neonPink/10 transition font-semibold text-sm"
-      >
-        Try Gesture Scroll
-      </button>
-    </div>
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)
+![C](https://img.shields.io/badge/C-A8B9CC?style=flat&logo=c&logoColor=black)
+![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=postgresql&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white)
 
-    <a href="https://github.com/i4rushi" target="_blank" class="text-xl hover:text-neonPink transition">
-      <i class="fab fa-github"></i>
-    </a>
-  </div>
-</nav>
+### What I work with
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center pt-16 px-6 relative overflow-hidden"> 
-  <div class="absolute top-20 right-0 w-72 h-72 bg-neonPink/10 rounded-full blur-3xl"></div> 
-  <div class="absolute bottom-20 left-0 w-96 h-96 bg-neonPurple/10 rounded-full blur-3xl"></div> 
-  <div class="max-w-4xl text-center fade-in-up"> 
-    <p class="text-neonPink font-semibold mb-4 tracking-wide uppercase text-sm">Aspiring Computer Engineer @ Purdue</p> 
-    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"> Building <span class="gradient-text">Intelligent Systems</span> <br> & Scalable Data Pipelines. </h1> 
-    <p class="text-xl text-textDim mb-10 max-w-2xl mx-auto"> I bridge the gap between rigorous Data Structures logic and modern Deep Learning applications. Expert in LLM Fine-tuning, Computer Vision, and Automated Workflows. </p> 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center"> 
-      <a
-        href="#projects"
-        class="px-8 py-4 rounded-full font-bold text-black
-               bg-neonPink
-               hover:bg-neonPurple
-               shadow-neonPink
-               hover:shadow-neonSoft
-               transition-all transform hover:scale-105">
-        View My Work
-      </a>
-      <a
-        href="Arushi_GuptaResume2025.pdf"
-        class="px-8 py-4 rounded-full border border-neonPink/40
-               text-neonPink
-               hover:bg-neonPink/10
-               hover:shadow-neonPink
-               transition-all">
-        Download Resume
-      </a>
-    </div> 
-  </div> 
-</section>
+| Area | Tools &amp; techniques |
+| --- | --- |
+| **Agentic AI / LLM systems** | Multi-agent design · GraphRAG / RAG pipelines · LLM app engineering · GPT-4o · ElevenLabs (TTS) · Whisper (STT) · Cortex · n8n / Langflow |
+| **AI / ML** | Neural networks · decision trees · computer vision · data mining · NLP / sentiment analysis · prompt engineering · RLHF & model evaluation |
+| **Cloud &amp; data engineering** | GCP (Pub/Sub, Cloud Scheduler) · Microsoft Fabric · real-time data pipelines · Denodo |
+| **Deployment / DevOps** | GitHub Actions (CI/CD) · OIDC auth · Artifactory · Docker · CATs · Git · ROS |
+| **CRM &amp; automation** | GoHighLevel · Twilio · Airtable · Notion · Calendly · Mailchimp / Brevo |
+| **Embedded &amp; robotics** | Raspberry Pi · Pi Pico · microcontrollers · Duckietown self-driving |
+| **CS foundations** | Data structures &amp; algorithms (TA'd ECE 368) · discrete math · sorting · BSTs · tail recursion |
 
-<!-- ABOUT -->
-<section id="about" class="py-20 px-6 bg-panel/50">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-    <div class="fade-in-up delay-100">
-      <h2 class="text-3xl font-bold text-white mb-6"><span class="text-neonPink">01.</span> About Me</h2>
-      <div class="space-y-4 text-lg">
-        <p>
-          I am an AI Engineer & Data Specialist focused on building scalable systems. My expertise lies in <strong class="text-white">Computer Vision pipelines</strong> and <strong class="text-white">LLM fine-tuning workflows</strong>.
-        </p>
-        <p>
-          Currently, I am developing autonomous state estimation systems using <strong class="text-white">ROS & PID Control</strong> and engineering automated data pipelines with OCR & NLP.
-        </p>
-        <p>
-          Previously, I led a team of interns at <strong class="text-white">ReVenture AI</strong>, optimizing business processes by 30%. I have also rigorously evaluated 500+ AI responses/week as a Trainer at Outlier AI.
-        </p>
-        <p class="pt-4 text-sm text-textDim italic">
-          Core Competency: Bridging the gap between Low-level C++ optimization and High-level Python Deep Learning.
-        </p>
-      </div>
-    </div>
+---
 
-    <div class="fade-in-up delay-200">
-      <h3 class="text-xl font-bold text-white mb-6">Technical Arsenal</h3>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="group bg-panel/80 backdrop-blur-xl rounded-xl p-4
-                    border border-neonPink/20
-                    hover:border-neonPink hover:shadow-neonPink
-                    transition-all hover:-translate-y-2">
-          <h4 class="text-neonPink font-semibold mb-2">AI & Deep Learning</h4>
-          <ul class="space-y-1 text-sm">
-            <li><i class="fas fa-brain w-5 text-neonPink"></i> TensorFlow / Keras</li>
-            <li><i class="fas fa-fire w-5 text-neonPink"></i> PyTorch</li>
-            <li><i class="fas fa-robot w-5 text-neonPink"></i> Hugging Face / LLMs</li>
-            <li><i class="fas fa-eye w-5 text-neonPink"></i> OpenCV</li>
-          </ul>
-        </div>
-        <div class="group bg-panel/80 backdrop-blur-xl rounded-xl p-4
-                    border border-neonPink/20
-                    hover:border-neonPink hover:shadow-neonPink
-                    transition-all hover:-translate-y-2">
-          <h4 class="text-neonCyan font-semibold mb-2">Data Engineering</h4>
-          <ul class="space-y-1 text-sm">
-            <li><i class="fas fa-database w-5 text-neonCyan"></i> SQL / NoSQL</li>
-            <li><i class="fas fa-table w-5 text-neonCyan"></i> Pandas / NumPy</li>
-            <li><i class="fas fa-chart-bar w-5 text-neonCyan"></i> Matplotlib</li>
-            <li><i class="fas fa-search w-5 text-neonCyan"></i> Tesseract OCR</li>
-          </ul>
-        </div>
-        <div class="group bg-panel/80 backdrop-blur-xl rounded-xl p-4
-                    border border-neonPink/20
-                    hover:border-neonPink hover:shadow-neonPink
-                    transition-all hover:-translate-y-2">
-          <h4 class="text-neonPink font-semibold mb-2">Robotics & Ops</h4>
-          <ul class="space-y-1 text-sm">
-            <li><i class="fas fa-microchip w-5 text-neonPink"></i> ROS (Robot OS)</li>
-            <li><i class="fab fa-docker w-5 text-neonPink"></i> Docker</li>
-            <li><i class="fab fa-linux w-5 text-neonPink"></i> Linux / Bash</li>
-            <li><i class="fas fa-project-diagram w-5 text-neonPink"></i> n8n Automation</li>
-          </ul>
-        </div>
-        <div class="group bg-panel/80 backdrop-blur-xl rounded-xl p-4
-                    border border-neonPink/20
-                    hover:border-neonPink hover:shadow-neonPink
-                    transition-all hover:-translate-y-2">
-          <h4 class="text-neonCyan font-semibold mb-2">Languages</h4>
-          <ul class="space-y-1 text-sm">
-            <li><i class="fab fa-python w-5 text-neonCyan"></i> Python (Advanced)</li>
-            <li><i class="fab fa-cuttlefish w-5 text-neonCyan"></i> C / C++</li>
-            <li><i class="fab fa-js w-5 text-neonCyan"></i> JavaScript</li>
-            <li><i class="fas fa-square-root-variable w-5 text-neonCyan"></i> MATLAB / LaTeX</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+### Quote of the day
 
-<!-- EXPERIENCE -->
-<section id="experience" class="py-20 px-6 bg-bg">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-4">
-      <span class="text-neonPink">02.</span> Professional Experience
-      <span class="h-px bg-neonPink/20 flex-grow"></span>
-    </h2>
+<p align="left">
+  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=light" alt="Quote of the day" />
+</p>
 
-    <div class="space-y-12">
-      
-      <div class="relative pl-8 border-l border-neonPink/30 fade-in-up delay-100">
-        <div class="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-neonCyan shadow-neonCyan"></div>
-        <div class="mb-2">
-          <h3 class="text-2xl font-bold text-white">Teaching Assistant - Data Structures & Algorithms</h3>
-          <p class="text-lg text-neonCyan">Purdue University <span class="text-textDim text-sm ml-2">| Aug 2025 - Present</span></p>
-        </div>
-        <ul class="list-disc ml-4 space-y-2 text-textDim">
-          <li>Mentored students in advanced C programming, covering <strong class="text-white">balanced trees, graph traversal, and dynamic programming</strong>.</li>
-          <li>Led weekly technical discussion sessions, successfully increasing student participation rates by 25%.</li>
-          <li>Debugged complex memory management issues and validated algorithmic logic for 300-level coursework.</li>
-        </ul>
-      </div>
+### Most used languages
 
-      <div class="relative pl-8 border-l border-neonPink/30 fade-in-up delay-200">
-        <div class="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-neonPink shadow-neonPink"></div>
-        <div class="mb-2">
-          <h3 class="text-2xl font-bold text-white">Intern Team Lead</h3>
-          <p class="text-lg text-neonPink">ReVenture AI <span class="text-textDim text-sm ml-2">| Jun 2025 - Aug 2025</span></p>
-        </div>
-        <ul class="list-disc ml-4 space-y-2 text-textDim">
-          <li>Led a team of interns to develop AI-driven solutions for business optimization.</li>
-          <li>Designed automated workflows using <strong class="text-white">n8n</strong>, increasing operational efficiency by <strong class="text-white">30%</strong> for non-profit clients.</li>
-          <li>Fine-tuned AI agents to streamline client communication, resulting in an <strong class="text-white">80% increase in sales</strong>.</li>
-        </ul>
-      </div>
+<p align="left">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=i4rushi&layout=compact&langs_count=8&hide_border=true&theme=default" alt="Top languages" />
+</p>
 
-      <div class="relative pl-8 border-l border-neonPink/30 fade-in-up delay-300">
-        <div class="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-neonPurple"></div>
-        <div class="mb-2">
-          <h3 class="text-2xl font-bold text-white">Generative AI Trainer</h3>
-          <p class="text-lg text-neonPurple">Outlier AI <span class="text-textDim text-sm ml-2">| Jun 2024 - Aug 2024</span></p>
-        </div>
-        <ul class="list-disc ml-4 space-y-2 text-textDim">
-          <li>Specialized in Mathematics & Python training for Large Language Models.</li>
-          <li>Evaluated <strong class="text-white">500+ weekly responses</strong> in calculus and linear algebra with 70% accuracy.</li>
-          <li>Validated mathematical proofs in LaTeX and debugged complex Python implementations to ensure rigorous academic standards.</li>
-        </ul>
-      </div>
+---
 
-      <div class="relative pl-8 border-l border-neonPink/30 fade-in-up delay-300">
-        <div class="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-textDim"></div>
-        <div class="mb-2">
-          <h3 class="text-2xl font-bold text-white">Pharmacy Technician</h3>
-          <p class="text-lg text-textDim">Retail Pharmacy <span class="text-textDim text-sm ml-2">| Previous Experience</span></p>
-        </div>
-        <ul class="list-disc ml-4 space-y-2 text-textDim">
-          <li>Managed sensitive patient drug data logs to ensure precise refill synchronization and compliance.</li>
-          <li>Physically prepared medications with 100% accuracy, maintaining strict adherence to safety protocols and inventory standards.</li>
-          <li>Optimized workflow efficiency in a high-volume environment, ensuring timely medication delivery for all patients.</li>
-        </ul>
-      </div>
+### Let's connect
 
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="py-20 px-6 bg-panel/50">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-white mb-12 flex items-center gap-4">
-      <span class="text-neonPink">03.</span> Featured Projects
-      <span class="h-px bg-neonPink/20 flex-grow"></span>
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      
-      <div class="group bg-panel rounded-xl overflow-hidden border border-neonPink/30 hover:border-neonPink hover:shadow-neonPink transition-all hover:-translate-y-2 duration-300 fade-in-up delay-100 flex flex-col">
-        
-        <div class="h-56 bg-bg overflow-hidden relative">
-          <img 
-                            src="duckie.jpeg" 
-                            alt="Autonomous Robotics Demo" 
-                            class="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform duration-500"
-                        >
-        </div>
-        
-        <div class="p-6 flex-grow flex flex-col">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-white group-hover:text-neonPink transition-colors">Autonomous Robotics Core</h3>
-            <div class="flex gap-4 text-textDim">
-              <a href="https://github.com/i4rushi/myduckiebot-core" target="_blank" class="hover:text-neonPink transition"><i class="fab fa-github text-xl"></i></a>
-            </div>
-          </div>
-
-          <div class="mb-4 p-3 bg-bg border-l-4 border-neonCyan rounded-r-md">
-            <p class="text-xs font-bold text-neonCyan uppercase tracking-wider mb-1">⚡ The Wow Factor</p>
-            <p class="text-sm text-white font-semibold">Real-time PID State Estimation & Closed-Loop Control</p>
-          </div>
-
-          <div class="mb-4">
-             <p class="text-xs font-bold text-textDim uppercase tracking-wider mb-1">📝 The Engineering</p>
-             <p class="text-textDim text-sm">
-                Engineered a self-driving navigation system using ROS and Computer Vision. I implemented a two-part vision pipeline (HSV thresholding) to perceive environments and a tuned PID controller to actuate steering in real-time.
-            </p>
-          </div>
-
-          <div class="mt-auto pt-4 border-t border-neonPink/20 flex flex-wrap gap-2 text-xs font-mono text-neonCyan">
-            <span>ROS</span>
-            <span>Python</span>
-            <span>OpenCV</span>
-            <span>PID Control</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="group bg-panel rounded-xl overflow-hidden border border-neonPink/30 hover:border-neonPink hover:shadow-neonPink transition-all hover:-translate-y-2 duration-300 fade-in-up delay-200 flex flex-col">
-        
-        <div class="h-56 bg-bg overflow-hidden relative">
-          <img 
-                            src="proj2.png" 
-                            alt="Expense App Demo2" 
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        >
-        </div>
-        
-        <div class="p-6 flex-grow flex flex-col">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-white group-hover:text-neonPink transition-colors">Expense Intel Pipeline</h3>
-            <div class="flex gap-4 text-textDim">
-              <a href="https://github.com/i4rushi/SmartReceipt-Budget-Tracker-Prototype" target="_blank" class="hover:text-neonPink transition"><i class="fab fa-github text-xl"></i></a>
-            </div>
-          </div>
-
-           <div class="mb-4 p-3 bg-bg border-l-4 border-neonPink rounded-r-md">
-            <p class="text-xs font-bold text-neonPink uppercase tracking-wider mb-1">⚡ The Wow Factor</p>
-            <p class="text-sm text-white font-semibold">90% RPA (Receipt Parsing Accuracy) via Clustering</p>
-          </div>
-
-          <div class="mb-4">
-            <p class="text-xs font-bold text-textDim uppercase tracking-wider mb-1">📝 The Engineering</p>
-            <p class="text-textDim text-sm">
-                Built an end-to-end data pipeline transforming unstructured receipt images into categorized financial insights. Utilized Tesseract OCR for extraction and Unsupervised Learning (Sentence Transformers) for semantic item grouping.
-            </p>
-          </div>
-
-          <div class="mt-auto pt-4 border-t border-neonPink/20 flex flex-wrap gap-2 text-xs font-mono text-neonPink">
-            <span>Tesseract OCR</span>
-            <span>Transformers</span>
-            <span>Scikit-Learn</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="group bg-panel rounded-xl overflow-hidden border border-neonPink/30 hover:border-neonPink hover:shadow-neonPink transition-all hover:-translate-y-2 duration-300 fade-in-up delay-300 flex flex-col">
-        
-        <div class="h-56 bg-bg overflow-hidden relative">
-          <img 
-                            src="output.png" 
-                            alt="Data Mining Demo." 
-                            class="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-500"
-                        >
-        </div>
-        
-        <div class="p-6 flex-grow flex flex-col">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-white group-hover:text-neonPink transition-colors">Malicious Activity Predictor</h3>
-            <div class="flex gap-4 text-textDim">
-              <a href="https://github.com/i4rushi/Malicious-Activity-Prediction" target="_blank" class="hover:text-neonPink transition"><i class="fab fa-github text-xl"></i></a>
-            </div>
-          </div>
-
-           <div class="mb-4 p-3 bg-bg border-l-4 border-neonCyan rounded-r-md">
-            <p class="text-xs font-bold text-neonCyan uppercase tracking-wider mb-1">⚡ The Wow Factor</p>
-            <p class="text-sm text-white font-semibold">High-Dimensional Anomaly Detection & Prediction</p>
-          </div>
-
-          <div class="mb-4">
-            <p class="text-xs font-bold text-textDim uppercase tracking-wider mb-1">📝 The Engineering</p>
-            <p class="text-textDim text-sm">
-                Developed a data mining solution to detect malicious patterns in high-dimensional datasets. I simulated real-world threats and engineered a predictive model capable of flagging security anomalies before escalation.
-            </p>
-          </div>
-
-          <div class="mt-auto pt-4 border-t border-neonPink/20 flex flex-wrap gap-2 text-xs font-mono text-neonCyan">
-            <span>Jupyter</span>
-            <span>Pandas</span>
-            <span>Anomaly Detection</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contact" class="py-12 bg-bg border-t border-neonPink/20 text-center">
-  <h2 class="text-4xl font-bold text-white mb-6">Let's Build Something Intelligent.</h2>
-  <p class="text-textDim mb-8 max-w-lg mx-auto">
-    I am currently looking for full-time opportunities in AI Engineering and Data Science.
-  </p>
-  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arushigupt.23@gmail.com" target="_blank" class="inline-block px-8 py-4 border border-neonPink text-neonPink font-bold rounded-md hover:bg-neonPink/10 hover:shadow-neonPink transition-all mb-12">
-    Say Hello
-  </a>
-  
-  <div class="flex justify-center gap-8 mb-8 text-2xl text-textDim">
-    <a href="https://github.com/i4rushi" target="_blank" class="hover:text-neonPink transition-colors"><i class="fab fa-github"></i></a>
-    <a href="https://linkedin.com/in/arushig05" target="_blank" class="hover:text-neonPink transition-colors"><i class="fab fa-linkedin"></i></a>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arushigupt.23@gmail.com" target="_blank" class="hover:text-neonPink transition-colors"><i class="fas fa-envelope"></i></a>
-  </div>
-  <p class="text-textDim/60 text-sm">© 2025 Arushi Gupta. Built with Tailwind CSS.</p>
-</footer>
-
-<!-- FLOATING CV PANEL -->
-<div
-  id="cvPanel"
-  class="fixed bottom-4 right-4 w-72 bg-panel border border-neonPink rounded-lg shadow-neonPink hidden z-50"
->
-  <div class="flex justify-between items-center px-3 py-2 border-b border-neonPink/20">
-    <span class="text-sm text-neonPink font-semibold">Gesture Navigation</span>
-    <button id="cvClose" class="text-textDim hover:text-neonPink transition">✕</button>
-  </div>
-
-  <div class="relative">
-    <video
-      id="video"
-      class="w-full h-40 object-cover rounded-b-lg"
-      autoplay
-      muted
-      playsinline
-    ></video>
-
-    <canvas
-      id="overlay"
-      class="absolute top-0 left-0 w-full h-40 pointer-events-none"
-    ></canvas>
-  </div>
-
-  <div
-    id="gestureLabel"
-    class="px-3 py-2 text-xs text-neonPink font-semibold border-t border-neonPink/20"
-  >
-    Detected: —
-  </div>
-
-  <div class="px-3 py-2 text-xs text-textDim space-y-1">
-    <div>1 finger → About</div>
-    <div>2 fingers → Experience</div>
-    <div>3 fingers → Work</div>
-    <div>4 fingers → Contact</div>
-    <div>5 fingers → Home</div>
-  </div>
-</div>
-
-<!-- MEDIAPIPE -->
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-
-<!-- GESTURE LOGIC -->
-<script>
-const toggleBtn = document.getElementById("cvToggle");
-const panel = document.getElementById("cvPanel");
-const closeBtn = document.getElementById("cvClose");
-
-const video = document.getElementById("video");
-const canvas = document.getElementById("overlay");
-const ctx = canvas.getContext("2d");
-const label = document.getElementById("gestureLabel");
-
-let camera = null;
-let enabled = false;
-let lastTriggered = null;
-let cooldown = false;
-
-const sectionMap = {
-  1: { id: "about", label: "☝️ About" },
-  2: { id: "experience", label: "✌️ Experience" },
-  3: { id: "projects", label: "🤟 Work" },
-  4: { id: "contact", label: "🖖 Contact" },
-  5: { id: null, label: "✋ Home" }
-};
-
-const hands = new Hands({
-  locateFile: (file) =>
-    `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
-});
-
-// CHANGE 1: Lowered detection confidence to 0.5 to catch hand faster on re-entry
-hands.setOptions({
-  maxNumHands: 1,
-  modelComplexity: 1,
-  minDetectionConfidence: 0.5, 
-  minTrackingConfidence: 0.7
-});
-
-hands.onResults(onResults);
-
-toggleBtn.onclick = () => {
-  panel.classList.remove("hidden");
-  enabled = true;
-  label.textContent = "Detected: —";
-
-  camera = new Camera(video, {
-    onFrame: async () => {
-      await hands.send({ image: video });
-    },
-    width: 320,
-    height: 240
-  });
-
-  camera.start();
-};
-
-closeBtn.onclick = () => {
-  panel.classList.add("hidden");
-  enabled = false;
-  cooldown = false;
-  lastTriggered = null;
-  label.textContent = "Detected: —";
-
-  if (camera) {
-    camera.stop();
-    camera = null;
-  }
-
-  if (video.srcObject) {
-    video.srcObject.getTracks().forEach(track => track.stop());
-    video.srcObject = null;
-  }
-};
-
-// CHANGE 2: Added 'handedness' parameter to support both hands
-function countFingers(landmarks, handedness) {
-  let count = 0;
-
-  const tipIds = [8, 12, 16, 20];
-  const pipIds = [6, 10, 14, 18];
-
-  // 1. Count non-thumb fingers (Vertical Check)
-  for (let i = 0; i < tipIds.length; i++) {
-    if (landmarks[tipIds[i]].y < landmarks[pipIds[i]].y) {
-      count++;
-    }
-  }
-
-  // 2. Count Thumb (Horizontal Check depends on Left vs Right hand)
-  const thumbTip = landmarks[4];
-  const thumbIP = landmarks[3];
-  
-  // MediaPipe "Left" label usually corresponds to the user's Right hand in selfie mode,
-  // but we check the label directly.
-  // "Right" label -> Thumb is on the Left side (x decreases)
-  // "Left" label -> Thumb is on the Right side (x increases)
-  if (handedness === "Right") {
-      // For a Right hand label, thumb tip x should be LESS than knuckle x to be "out"
-      if (thumbTip.x < thumbIP.x) count++;
-  } else {
-      // For a Left hand label, thumb tip x should be GREATER than knuckle x
-      if (thumbTip.x > thumbIP.x) count++;
-  }
-
-  return count;
-}
-
-// ---- Gesture Handler ----
-function onResults(results) {
-  // Clear canvas every frame
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (!enabled) return;
-
-  // CHANGE 3: CRITICAL FIX
-  // Check if landmarks exist AND if the array is empty. 
-  // If empty, reset state and return to prevent crash.
-  if (!results.multiHandLandmarks || results.multiHandLandmarks.length === 0) {
-    label.textContent = "Detected: —";
-    // Optional: Reset trigger so you can re-trigger the same gesture immediately upon re-entry
-    // lastTriggered = null; 
-    return;
-  }
-
-  const landmarks = results.multiHandLandmarks[0];
-  
-  // Get handedness (Left vs Right) to fix thumb logic
-  // Safe access because we already checked landmarks.length > 0
-  const handedness = results.multiHandedness && results.multiHandedness[0] 
-                     ? results.multiHandedness[0].label 
-                     : "Left"; // Default fallback
-
-  // Draw landmarks
-  ctx.fillStyle = "#22d3ee";
-  landmarks.forEach(pt => {
-    ctx.beginPath();
-    ctx.arc(pt.x * canvas.width, pt.y * canvas.height, 4, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  // Pass handedness to the counter
-  const fingerCount = countFingers(landmarks, handedness);
-
-  if (fingerCount === 0 || fingerCount > 5) {
-    label.textContent = "Detected: —";
-    return;
-  }
-
-  const gesture = sectionMap[fingerCount];
-  // Safety check: ensure gesture exists for this count
-  if (!gesture) return; 
-  
-  label.textContent = `Detected: ${gesture.label}`;
-
-  if (cooldown || lastTriggered === fingerCount) return;
-
-  cooldown = true;
-  lastTriggered = fingerCount;
-
-  if (fingerCount === 5) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    const target = document.getElementById(gesture.id);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-
-  setTimeout(() => {
-    cooldown = false;
-  }, 1200);
-}
-</script>
-
-
-</body>
-</html>
-
-
-
+<p align="left">
+  <a href="https://www.linkedin.com/in/arushig05/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://i4rushi.github.io"><img src="https://img.shields.io/badge/Portfolio-0969da?style=flat&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+</p>
