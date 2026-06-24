@@ -3,517 +3,512 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arushi Gupta — Agentic AI Engineer</title>
+<title>Arushi Gupta — portfolio</title>
 <meta name="description" content="Arushi Gupta — agentic AI engineer. Builds the systems, speaks the finance. AI Fellow at Eli Lilly (LRL Finance Analytics)." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
 
 <style>
   :root{
-    --paper:#FAF4F2;
-    --paper-2:#F3E6E6;
-    --ink:#271720;
-    --muted:#7C6670;
-    --rose:#C42A6E;
-    --rose-deep:#7E2148;
-    --rule:#E5D2D6;
-    --maxw:1080px;
+    /* --- "Plum" editor theme --- */
+    --bg-editor:#1a121b;
+    --bg-side:#160f17;
+    --bg-bar:#120c13;
+    --bg-tab:#1f1620;
+    --bg-tab-active:#1a121b;
+    --border:#2c2030;
+    --fg:#ead9e5;
+    --fg-dim:#8a7785;
+    --ln:#5c4a58;
+    --sel:rgba(214,38,128,.24);
+    --hover:#241926;
 
-    --display:'Archivo', system-ui, sans-serif;
-    --serif:'Newsreader', Georgia, serif;
-    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    /* syntax */
+    --c:#7a6675;     /* comment  */
+    --k:#ff66ae;     /* keyword  */
+    --s:#f0a6c8;     /* string   */
+    --fn:#c490e4;    /* function */
+    --num:#e8b98a;   /* number/const */
+    --ty:#b57edc;    /* type     */
+    --prop:#dc97c4;  /* property */
+    --op:#9a8595;    /* operator */
+    --accent:#ff3d9a;
+    --status:#7e2148;
+    --status-deep:#5e1736;
+
+    --ui:'Inter',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html,body{height:100%;}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--serif);
-    font-size:18px;
-    line-height:1.6;
+    margin:0;background:var(--bg-bar);color:var(--fg);
+    font-family:var(--ui);font-size:13px;overflow:hidden;
     -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
   }
+  ::selection{background:var(--sel);}
   a{color:inherit;text-decoration:none;}
-  ::selection{background:var(--rose);color:#fff;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+  :focus-visible{outline:1px solid var(--accent);outline-offset:-1px;}
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
-
-  /* shared utility text */
-  .mono{font-family:var(--mono);}
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--rose-deep);
-    font-weight:500;
+  .app{
+    height:100vh;display:grid;
+    grid-template-columns:48px 244px 1fr;
+    grid-template-rows:36px 1fr 24px;
   }
 
-  /* ---------------- NAV ---------------- */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(250,244,242,.82);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--rule);
+  /* ---------- TITLE BAR ---------- */
+  .titlebar{
+    grid-column:1/4;background:var(--bg-bar);
+    display:flex;align-items:center;gap:14px;padding:0 14px;
+    border-bottom:1px solid var(--border);user-select:none;
   }
-  nav .wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    height:60px;
-  }
-  .brand{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em;}
-  .brand span{color:var(--rose);}
-  .navlinks{display:flex;gap:26px;align-items:center;font-family:var(--mono);font-size:13px;}
-  .navlinks a{color:var(--muted);transition:color .2s;}
-  .navlinks a:hover{color:var(--rose);}
-  .navlinks .gh{color:var(--ink);}
-  .navtoggle{display:none;}
+  .lights{display:flex;gap:8px;}
+  .lights i{width:12px;height:12px;border-radius:50%;display:block;}
+  .lights .r{background:#ff5f57;} .lights .y{background:#febc2e;} .lights .g{background:#28c840;}
+  .titlebar .ttl{flex:1;text-align:center;color:var(--fg-dim);font-size:12.5px;font-family:var(--mono);}
+  .titlebar .ttl b{color:var(--fg);font-weight:500;}
+  .hamb{display:none;color:var(--fg-dim);font-size:18px;padding:2px 6px;}
 
-  /* ---------------- HERO ---------------- */
-  header.hero{padding:92px 0 76px;border-bottom:1px solid var(--rule);}
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:52px;
-    align-items:end;
+  /* ---------- ACTIVITY BAR ---------- */
+  .activity{
+    grid-column:1;grid-row:2;background:var(--bg-bar);
+    display:flex;flex-direction:column;align-items:center;
+    padding:10px 0;border-right:1px solid var(--border);
   }
-  h1.name{
-    font-family:var(--display);
-    font-weight:800;
-    font-size:clamp(48px,9vw,104px);
-    line-height:.92;
-    letter-spacing:-.03em;
-    margin:0 0 26px;
+  .activity .grow{flex:1;}
+  .actbtn{
+    width:48px;height:46px;display:grid;place-items:center;color:var(--fg-dim);
+    border-left:2px solid transparent;transition:color .15s;
   }
-  .tagline{
-    font-family:var(--display);
-    font-weight:500;
-    font-size:clamp(20px,2.6vw,27px);
-    line-height:1.25;
-    letter-spacing:-.01em;
-    max-width:30ch;
-    margin:0 0 34px;
+  .actbtn:hover{color:var(--fg);}
+  .actbtn.active{color:var(--accent);border-left-color:var(--accent);}
+  .actbtn svg{width:22px;height:22px;}
+
+  /* ---------- SIDEBAR ---------- */
+  .sidebar{
+    grid-column:2;grid-row:2;background:var(--bg-side);
+    border-right:1px solid var(--border);overflow-y:auto;
   }
-  .tagline em{color:var(--rose);font-style:normal;}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
-  .btn{
-    font-family:var(--mono);font-size:13px;font-weight:500;
-    padding:13px 22px;border-radius:2px;
-    border:1px solid var(--ink);
-    transition:all .2s;display:inline-flex;gap:8px;align-items:center;
+  .side-h{
+    padding:11px 18px 9px;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--fg-dim);
   }
-  .btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-  .btn.primary:hover{background:var(--rose);border-color:var(--rose);}
-  .btn.ghost:hover{border-color:var(--rose);color:var(--rose);}
-
-  /* hero metadata = document header */
-  .meta{
-    font-family:var(--mono);
-    font-size:13.5px;
-    border-top:2px solid var(--ink);
+  .tree-h{
+    display:flex;align-items:center;gap:5px;padding:4px 14px;
+    font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--fg);
+    text-transform:uppercase;cursor:default;
   }
-  .meta .row{
-    display:grid;grid-template-columns:64px 1fr;
-    gap:14px;padding:11px 0;
-    border-bottom:1px solid var(--rule);
+  .tree-h .chev{color:var(--fg-dim);font-size:10px;}
+  .file{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+    padding:4px 14px 4px 30px;color:var(--fg-dim);font-size:13.5px;
+    font-family:var(--mono);border-left:2px solid transparent;
   }
-  .meta .k{color:var(--muted);letter-spacing:.08em;}
-  .meta .v{color:var(--ink);}
-  .meta .v b{color:var(--rose-deep);font-weight:600;}
+  .file:hover{background:var(--hover);color:var(--fg);}
+  .file.active{background:var(--hover);color:var(--fg);border-left-color:var(--accent);}
+  .ficon{font-size:10px;font-weight:700;width:16px;text-align:center;}
+  .i-ts{color:#6fb3ff;} .i-json{color:var(--num);} .i-md{color:var(--k);} .i-pdf{color:#ff7a7a;}
 
-  /* ---------------- SECTION SCAFFOLD ---------------- */
-  section{padding:74px 0;border-bottom:1px solid var(--rule);scroll-margin-top:70px;}
-  .sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:38px;}
-  .sec-head .num{font-family:var(--mono);font-size:12px;color:var(--rose);letter-spacing:.15em;}
-  .sec-head h2{
-    font-family:var(--display);font-weight:700;
-    font-size:clamp(22px,3vw,30px);letter-spacing:-.01em;margin:0;
+  /* ---------- EDITOR ---------- */
+  .editor{grid-column:3;grid-row:2;display:flex;flex-direction:column;background:var(--bg-editor);min-width:0;}
+  .tabs{display:flex;background:var(--bg-bar);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    display:flex;align-items:center;gap:8px;padding:9px 16px;
+    font-family:var(--mono);font-size:12.5px;color:var(--fg-dim);
+    background:var(--bg-tab);border-right:1px solid var(--border);
+    border-top:2px solid transparent;white-space:nowrap;
   }
-  .sec-head .line{flex:1;height:1px;background:var(--rule);transform-origin:left;}
+  .tab:hover{color:var(--fg);}
+  .tab.active{background:var(--bg-tab-active);color:var(--fg);border-top-color:var(--accent);}
+  .tab .x{color:var(--fg-dim);font-size:14px;line-height:1;opacity:0;}
+  .tab.active .x,.tab:hover .x{opacity:.6;}
 
-  /* ---------------- PROFILE ---------------- */
-  .profile{
-    font-size:clamp(20px,2.3vw,25px);
-    line-height:1.5;max-width:34ch;
+  .breadcrumb{
+    padding:6px 22px;font-family:var(--mono);font-size:11.5px;color:var(--fg-dim);
+    border-bottom:1px solid var(--border);
   }
-  .profile p{margin:0 0 1em;}
-  .profile .accent{color:var(--rose-deep);}
-  .profile-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:start;}
-  .aside{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.9;padding-top:10px;}
-  .aside .lbl{color:var(--rose-deep);letter-spacing:.12em;display:block;margin-bottom:6px;}
+  .breadcrumb b{color:var(--prop);font-weight:400;}
 
-  /* ---------------- LEDGER (work + experience) ---------------- */
-  details.item{border-top:1px solid var(--rule);}
-  details.item:last-of-type{border-bottom:1px solid var(--rule);}
-  details.item summary{
-    list-style:none;cursor:pointer;
-    display:flex;align-items:baseline;gap:16px;
-    padding:22px 0;
+  .editor-body{flex:1;overflow:auto;position:relative;}
+  .code{counter-reset:ln;padding:14px 0 60px;font-family:var(--mono);font-size:13.5px;line-height:1.62;min-width:max-content;}
+  .filepage{display:none;animation:fade .22s ease;}
+  .filepage.show{display:block;}
+  @keyframes fade{from{opacity:0;} to{opacity:1;}}
+  .line{position:relative;padding:0 28px 0 64px;white-space:pre;min-height:1.62em;}
+  .line:hover{background:rgba(255,61,154,.05);}
+  .line::before{
+    counter-increment:ln;content:counter(ln);
+    position:absolute;left:0;width:42px;text-align:right;
+    color:var(--ln);font-variant-numeric:tabular-nums;
   }
-  details.item summary::-webkit-details-marker{display:none;}
-  .it-name{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.4vw,26px);letter-spacing:-.01em;white-space:nowrap;}
-  .it-lead{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-5px);min-width:18px;}
-  .it-tag{font-family:var(--mono);font-size:12.5px;color:var(--muted);white-space:nowrap;text-align:right;}
-  .it-mark{font-family:var(--mono);color:var(--rose);font-size:18px;width:16px;text-align:center;transition:transform .25s;}
-  details.item[open] .it-mark{transform:rotate(45deg);}
-  details.item:hover .it-name{color:var(--rose-deep);}
-  details.item:hover .it-lead{border-color:var(--rose);}
-  .it-body{
-    padding:0 0 26px;
-    display:grid;grid-template-columns:1fr 1fr;gap:32px;
-    animation:fade .4s ease;
+  .line.h1{font-size:30px;line-height:1.4;font-weight:700;}
+
+  /* syntax tokens */
+  .c{color:var(--c);font-style:italic;}
+  .k{color:var(--k);}
+  .s{color:var(--s);}
+  .fn{color:var(--fn);}
+  .num{color:var(--num);}
+  .ty{color:var(--ty);}
+  .prop{color:var(--prop);}
+  .op{color:var(--op);}
+  .lnk{color:var(--s);}
+  .lnk:hover{text-decoration:underline;text-decoration-color:var(--accent);}
+  .mh{color:var(--k);font-weight:700;}
+  .mb{color:var(--fg);font-weight:700;}
+  .mq{color:var(--op);font-style:italic;}
+  .cursor{display:inline-block;width:8px;height:1.05em;background:var(--accent);vertical-align:text-bottom;animation:blink 1.05s steps(1) infinite;margin-left:2px;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- STATUS BAR ---------- */
+  .status{
+    grid-column:1/4;grid-row:3;background:var(--status);color:#ffe6f2;
+    display:flex;align-items:center;font-size:11.5px;font-family:var(--mono);
+    user-select:none;
   }
-  .it-note{
-    font-family:var(--display);font-weight:500;font-size:18px;line-height:1.4;
-    color:var(--rose-deep);max-width:26ch;
+  .status .seg{padding:0 10px;height:24px;display:flex;align-items:center;gap:5px;}
+  .status .seg.btn:hover{background:var(--status-deep);}
+  .status .branch{background:var(--status-deep);}
+  .status .grow{flex:1;}
+
+  /* ---------- COMMAND PALETTE ---------- */
+  .palette-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:90;}
+  .palette-bg.open{display:block;}
+  .palette{
+    position:fixed;top:52px;left:50%;transform:translateX(-50%);
+    width:min(560px,92vw);background:#241926;border:1px solid var(--border);
+    border-radius:7px;box-shadow:0 16px 50px rgba(0,0,0,.55);z-index:91;
+    overflow:hidden;
   }
-  .it-desc{font-size:17px;color:var(--ink);}
-  .it-desc .repo{font-family:var(--mono);font-size:12.5px;color:var(--muted);display:inline-flex;gap:6px;margin-top:14px;}
-  .it-desc .repo a{color:var(--rose-deep);border-bottom:1px solid var(--rule);}
-  .it-desc .repo a:hover{border-color:var(--rose);}
-  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-
-  /* experience uses same ledger but value is dates */
-  .exp summary .it-tag{color:var(--rose-deep);}
-
-  .alsobuilt{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.9;margin-top:26px;}
-  .alsobuilt b{color:var(--ink);font-weight:500;}
-
-  /* ---------------- STACK (balance sheet) ---------------- */
-  .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:38px 44px;}
-  .col .lbl{
-    font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--rose-deep);padding-bottom:9px;margin-bottom:12px;border-bottom:2px solid var(--ink);
+  .palette input{
+    width:100%;padding:13px 15px;background:#1a121b;border:none;
+    color:var(--fg);font-family:var(--mono);font-size:14px;border-bottom:1px solid var(--border);
   }
-  .col ul{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:14px;line-height:2.05;color:var(--ink);}
-
-  /* ---------------- CONTACT ---------------- */
-  .contact{text-align:left;}
-  .contact h2{
-    font-family:var(--display);font-weight:800;
-    font-size:clamp(34px,6vw,68px);line-height:1;letter-spacing:-.025em;margin:0 0 30px;
+  .palette input:focus{outline:1px solid var(--accent);}
+  .pal-list{max-height:300px;overflow-y:auto;}
+  .pal-item{
+    display:flex;align-items:center;gap:10px;padding:9px 15px;
+    font-family:var(--mono);font-size:13px;color:var(--fg-dim);cursor:pointer;
   }
-  .contact h2 .dot{color:var(--rose);}
-  .links{display:flex;gap:30px;flex-wrap:wrap;font-family:var(--mono);font-size:14px;}
-  .links a{display:inline-flex;gap:9px;align-items:center;border-bottom:1px solid var(--rule);padding-bottom:3px;transition:all .2s;}
-  .links a:hover{color:var(--rose);border-color:var(--rose);}
+  .pal-item:hover,.pal-item.sel{background:var(--accent);color:#fff;}
+  .pal-item .hint{margin-left:auto;font-size:11px;opacity:.7;}
 
-  footer{padding:34px 0;font-family:var(--mono);font-size:12px;color:var(--muted);}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  /* scrollbars */
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-thumb{background:#3a2a3c;border-radius:6px;}
+  ::-webkit-scrollbar-thumb:hover{background:#4d3850;}
 
-  /* ---------------- REVEAL ANIM ---------------- */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
-  .reveal.in{opacity:1;transform:none;}
-  .sec-head .line{transform:scaleX(0);transition:transform .8s ease .1s;}
-  .sec-head.in .line{transform:scaleX(1);}
-
-  .hero-anim{opacity:0;transform:translateY(20px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
-  .d1{animation-delay:.05s;} .d2{animation-delay:.18s;} .d3{animation-delay:.30s;} .d4{animation-delay:.42s;}
-  @keyframes rise{to{opacity:1;transform:none;}}
-
-  :focus-visible{outline:2px solid var(--rose);outline-offset:3px;}
-
-  /* ---------------- RESPONSIVE ---------------- */
-  @media (max-width:820px){
-    .hero-grid{grid-template-columns:1fr;gap:42px;}
-    .profile-grid{grid-template-columns:1fr;gap:28px;}
-    .it-body{grid-template-columns:1fr;gap:16px;}
-    .stack{grid-template-columns:1fr 1fr;}
-    .navlinks{display:none;}
-    .navlinks.open{
-      display:flex;position:absolute;top:60px;left:0;right:0;
-      flex-direction:column;gap:18px;background:var(--paper);
-      padding:22px 28px;border-bottom:1px solid var(--rule);
+  /* ---------- RESPONSIVE ---------- */
+  .scrim{display:none;}
+  @media (max-width:760px){
+    .app{grid-template-columns:1fr;}
+    .activity{display:none;}
+    .sidebar{
+      grid-column:1;position:fixed;top:36px;bottom:24px;left:0;width:240px;z-index:80;
+      transform:translateX(-100%);transition:transform .22s ease;
     }
-    .navtoggle{display:block;font-family:var(--mono);font-size:13px;background:none;border:1px solid var(--ink);border-radius:2px;padding:7px 12px;cursor:pointer;color:var(--ink);}
+    .sidebar.open{transform:none;}
+    .editor{grid-column:1;}
+    .hamb{display:block;}
+    .titlebar .ttl{text-align:left;}
+    .scrim.open{display:block;position:fixed;inset:36px 0 24px 0;background:rgba(0,0,0,.45);z-index:70;}
+    .line{padding-left:52px;}
+    .line::before{width:34px;}
   }
-  @media (max-width:480px){
-    body{font-size:17px;}
-    .stack{grid-template-columns:1fr;}
-    .it-name{white-space:normal;}
-    .meta .row{grid-template-columns:56px 1fr;}
-  }
-
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;}
-    .reveal{opacity:1;transform:none;}
-    .sec-head .line{transform:scaleX(1);}
-    html{scroll-behavior:auto;}
   }
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<!-- NAV -->
-<nav>
-  <div class="wrap">
-    <a href="#top" class="brand">AG<span>.</span></a>
-    <button class="navtoggle" id="navtoggle" aria-label="Toggle menu" aria-expanded="false">menu</button>
-    <div class="navlinks" id="navlinks">
-      <a href="#profile">profile</a>
-      <a href="#work">work</a>
-      <a href="#experience">experience</a>
-      <a href="#stack">stack</a>
-      <a href="#contact">contact</a>
-      <a href="https://github.com/i4rushi" target="_blank" rel="noopener" class="gh">github ↗</a>
+  <!-- TITLE BAR -->
+  <div class="titlebar">
+    <button class="hamb" id="hamb" aria-label="Toggle sidebar">☰</button>
+    <div class="lights" aria-hidden="true"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+    <div class="ttl"><b>portfolio</b> — arushi-gupta</div>
+  </div>
+
+  <!-- ACTIVITY BAR -->
+  <nav class="activity" aria-label="Activity">
+    <button class="actbtn active" title="Explorer" aria-label="Explorer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h7l2 2h9v14H3z"/></svg>
+    </button>
+    <button class="actbtn" id="act-search" title="Search (⌘K)" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    </button>
+    <a class="actbtn" href="https://github.com/i4rushi" target="_blank" rel="noopener" title="Source Control" aria-label="Source Control">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M18 11.5c0 3-4 3.5-6.5 4"/></svg>
+    </a>
+    <div class="grow"></div>
+    <a class="actbtn" href="mailto:arushigupt.23@gmail.com" title="Account" aria-label="Account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.5-4 12.5-4 14 0"/></svg>
+    </a>
+    <button class="actbtn" id="act-settings" title="Command Palette (⌘K)" aria-label="Settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+    </button>
+  </nav>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" aria-label="Explorer">
+    <div class="side-h">Explorer</div>
+    <div class="tree-h"><span class="chev">▾</span> PORTFOLIO</div>
+    <button class="file active" data-file="readme"><span class="ficon i-md">M↓</span> README.md</button>
+    <button class="file" data-file="profile"><span class="ficon i-ts">TS</span> profile.ts</button>
+    <button class="file" data-file="work"><span class="ficon i-ts">TS</span> work.ts</button>
+    <button class="file" data-file="experience"><span class="ficon i-json">{}</span> experience.json</button>
+    <button class="file" data-file="stack"><span class="ficon i-ts">TS</span> stack.ts</button>
+    <button class="file" data-file="contact"><span class="ficon i-md">M↓</span> contact.md</button>
+    <a class="file" href="Arushi_Gupta_Resume.pdf" target="_blank" rel="noopener"><span class="ficon i-pdf">¶</span> resume.pdf ↗</a>
+  </aside>
+
+  <!-- EDITOR -->
+  <main class="editor">
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-file="readme"><span class="ficon i-md">M↓</span> README.md <span class="x">×</span></button>
+      <button class="tab" data-file="profile"><span class="ficon i-ts">TS</span> profile.ts <span class="x">×</span></button>
+      <button class="tab" data-file="work"><span class="ficon i-ts">TS</span> work.ts <span class="x">×</span></button>
+      <button class="tab" data-file="experience"><span class="ficon i-json">{}</span> experience.json <span class="x">×</span></button>
+      <button class="tab" data-file="stack"><span class="ficon i-ts">TS</span> stack.ts <span class="x">×</span></button>
+      <button class="tab" data-file="contact"><span class="ficon i-md">M↓</span> contact.md <span class="x">×</span></button>
     </div>
-  </div>
-</nav>
+    <div class="breadcrumb">portfolio <span class="op">›</span> <b id="crumb">README.md</b></div>
 
-<!-- HERO -->
-<header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <p class="eyebrow hero-anim d1">Agentic AI · Systems · Finance</p>
-        <h1 class="name hero-anim d2">Arushi<br>Gupta</h1>
-        <p class="tagline hero-anim d3">Agentic AI engineer. Builds the <em>systems</em>, speaks the <em>finance</em>.</p>
-        <div class="cta-row hero-anim d4">
-          <a href="#work" class="btn primary">View work →</a>
-          <a href="Arushi_Gupta_Resume.pdf" class="btn ghost">Resume ↗</a>
-        </div>
-      </div>
-      <div class="meta hero-anim d4" aria-label="Quick facts">
-        <div class="row"><span class="k">ROLE</span><span class="v"><b>AI Fellow</b></span></div>
-        <div class="row"><span class="k">TEAM</span><span class="v">LRL Finance Analytics, Eli Lilly</span></div>
-        <div class="row"><span class="k">BASE</span><span class="v">Indianapolis, IN</span></div>
-        <div class="row"><span class="k">EDU</span><span class="v">BS Computer Engineering, Purdue '26 — AI/ML</span></div>
-        <div class="row"><span class="k">BUILDS</span><span class="v">Multi-agent systems that ship</span></div>
-      </div>
-    </div>
-  </div>
-</header>
+    <div class="editor-body">
+      <div class="code">
 
-<!-- PROFILE -->
-<section id="profile">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="num">01</span><h2>Profile</h2><span class="line"></span></div>
-    <div class="profile-grid">
-      <div class="profile reveal">
-        <p>I build and ship <span class="accent">agentic AI</span> — multi-agent systems that do real work, with computer-engineering fundamentals underneath and a finance domain on top.</p>
-        <p>Most people have one of those three. The overlap is where I'm useful: I'll write the deployment pipeline, the deterministic math behind the model, and the layer below the API — not just the prompt.</p>
-      </div>
-      <div class="aside reveal">
-        <span class="lbl">CURRENTLY</span>
-        Automating financial analysis at Eli Lilly — pairing LLM reasoning with deterministic code for the numbers.
-        <br><br>
-        <span class="lbl">PREVIOUSLY</span>
-        An autonomous outbound sales agent, and a stream-scale LLM pipeline on GCP.
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- README.md -->
+        <section class="filepage show" id="file-readme" data-lang="Markdown">
+<div class="line h1"><span class="c">#</span> <span class="mh">Arushi Gupta</span></div>
+<div class="line"> </div>
+<div class="line"><span class="mq">&gt; Agentic AI engineer — builds the systems, speaks the finance.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="mb">Role</span>   AI Fellow · LRL Finance Analytics, Eli Lilly</div>
+<div class="line"><span class="mb">Base</span>   Boston, MA</div>
+<div class="line"><span class="mb">Edu</span>    BS Computer Engineering, Purdue '26 (AI/ML)</div>
+<div class="line"> </div>
+<div class="line">Open <span class="s">`work.ts`</span> to see what I've shipped — or press <span class="num">⌘K</span>.<span class="cursor"></span></div>
+        </section>
 
-<!-- SELECTED WORK -->
-<section id="work">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="num">02</span><h2>Selected work</h2><span class="line"></span></div>
+        <!-- profile.ts -->
+        <section class="filepage" id="file-profile" data-lang="TypeScript">
+<div class="line"><span class="c">/**</span></div>
+<div class="line"><span class="c"> * I build and ship agentic AI — multi-agent systems that do</span></div>
+<div class="line"><span class="c"> * real work, with computer-engineering fundamentals underneath</span></div>
+<div class="line"><span class="c"> * and a finance domain on top. The overlap is where I'm useful:</span></div>
+<div class="line"><span class="c"> * the deploy pipeline, the math, the layer below the API.</span></div>
+<div class="line"><span class="c"> */</span></div>
+<div class="line"> </div>
+<div class="line"><span class="k">export const</span> <span class="prop">arushi</span> <span class="op">= {</span></div>
+<div class="line">  <span class="prop">role</span><span class="op">:</span>   <span class="s">"AI Fellow"</span><span class="op">,</span></div>
+<div class="line">  <span class="prop">team</span><span class="op">:</span>   <span class="s">"LRL Finance Analytics, Eli Lilly"</span><span class="op">,</span></div>
+<div class="line">  <span class="prop">base</span><span class="op">:</span>   <span class="s">"Boston, MA"</span><span class="op">,</span></div>
+<div class="line">  <span class="prop">edu</span><span class="op">:</span>    <span class="s">"BS Computer Engineering, Purdue '26"</span><span class="op">,</span></div>
+<div class="line">  <span class="prop">focus</span><span class="op">:</span>  <span class="op">[</span><span class="s">"agentic AI"</span><span class="op">,</span> <span class="s">"systems"</span><span class="op">,</span> <span class="s">"finance"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">likes</span><span class="op">:</span>  <span class="s">"the parts most people skip"</span><span class="op">,</span></div>
+<div class="line"><span class="op">};</span></div>
+        </section>
 
-    <details class="item reveal" open>
-      <summary>
-        <span class="it-name">graphrag-rust</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">Rust · GraphRAG · Retrieval</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Knowledge-graph retrieval vs. vanilla vector RAG — built in Rust, below the API layer.</p>
-        <div class="it-desc">
-          A production-oriented GraphRAG pipeline that augments retrieval with a knowledge graph, then benchmarks it head-to-head against traditional vector RAG. Written in Rust to control performance and memory end-to-end.
-          <span class="repo">↗ <a href="https://github.com/i4rushi/graphrag-rust" target="_blank" rel="noopener">github.com/i4rushi/graphrag-rust</a></span>
-        </div>
-      </div>
-    </details>
+        <!-- work.ts -->
+        <section class="filepage" id="file-work" data-lang="TypeScript">
+<div class="line"><span class="k">type</span> <span class="ty">Project</span> <span class="op">= {</span> <span class="prop">name</span><span class="op">:</span> <span class="ty">string</span><span class="op">;</span> <span class="prop">stack</span><span class="op">:</span> <span class="ty">string</span><span class="op">[];</span> <span class="prop">note</span><span class="op">:</span> <span class="ty">string</span> <span class="op">};</span></div>
+<div class="line"> </div>
+<div class="line"><span class="k">export const</span> <span class="prop">work</span><span class="op">:</span> <span class="ty">Project</span><span class="op">[] = [</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">name</span><span class="op">:</span>  <span class="s">"graphrag-rust"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">stack</span><span class="op">:</span> <span class="op">[</span><span class="s">"Rust"</span><span class="op">,</span> <span class="s">"GraphRAG"</span><span class="op">,</span> <span class="s">"Retrieval"</span><span class="op">],</span></div>
+<div class="line">    <span class="prop">note</span><span class="op">:</span>  <span class="s">"KG retrieval vs. vanilla vector RAG — in Rust, below the API."</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">repo</span><span class="op">:</span>  <a class="lnk" href="https://github.com/i4rushi/graphrag-rust" target="_blank" rel="noopener">"i4rushi/graphrag-rust"</a><span class="op">,</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">name</span><span class="op">:</span>  <span class="s">"news-intelligence-pipeline"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">stack</span><span class="op">:</span> <span class="op">[</span><span class="s">"GCP"</span><span class="op">,</span> <span class="s">"Pub/Sub"</span><span class="op">,</span> <span class="s">"LLM"</span><span class="op">],</span></div>
+<div class="line">    <span class="prop">note</span><span class="op">:</span>  <span class="s">"Live news in, structured intelligence out — at stream scale."</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">repo</span><span class="op">:</span>  <a class="lnk" href="https://github.com/i4rushi/Real-Time-News-Intelligence-Pipeline" target="_blank" rel="noopener">"i4rushi/Real-Time-News-Intelligence-Pipeline"</a><span class="op">,</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">name</span><span class="op">:</span>  <span class="s">"outbound-sales-agent"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">stack</span><span class="op">:</span> <span class="op">[</span><span class="s">"Multi-agent"</span><span class="op">,</span> <span class="s">"LLM"</span><span class="op">,</span> <span class="s">"Telephony"</span><span class="op">],</span></div>
+<div class="line">    <span class="prop">note</span><span class="op">:</span>  <span class="s">"Qualifies a lead, then routes: close / book / nurture. @ ReVenture."</span><span class="op">,</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">name</span><span class="op">:</span>  <span class="s">"malicious-activity-predictor"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">stack</span><span class="op">:</span> <span class="op">[</span><span class="s">"Data mining"</span><span class="op">,</span> <span class="s">"Anomaly detection"</span><span class="op">],</span></div>
+<div class="line">    <span class="prop">note</span><span class="op">:</span>  <span class="s">"Flags threats in high-dimensional data before they escalate."</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">repo</span><span class="op">:</span>  <a class="lnk" href="https://github.com/i4rushi/Malicious-Activity-Prediction" target="_blank" rel="noopener">"i4rushi/Malicious-Activity-Prediction"</a><span class="op">,</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line"><span class="op">];</span></div>
+<div class="line"> </div>
+<div class="line"><span class="c">// also: NNs &amp; decision trees from scratch · Duckietown self-driving</span></div>
+<div class="line"><span class="c">// (ROS + PID + CV) · speech-to-text on a Pi · OCR receipt → budget</span></div>
+        </section>
 
-    <details class="item reveal">
-      <summary>
-        <span class="it-name">News Intelligence Pipeline</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">GCP · Pub/Sub · LLM</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Live news in, structured intelligence out — at stream scale.</p>
-        <div class="it-desc">
-          A real-time cloud pipeline on GCP that ingests live news streams via Pub/Sub and Cloud Scheduler, then fans out parallel LLM jobs for summarization, sentiment classification, and topic tagging.
-          <span class="repo">↗ <a href="https://github.com/i4rushi/Real-Time-News-Intelligence-Pipeline" target="_blank" rel="noopener">github.com/i4rushi/Real-Time-News-Intelligence-Pipeline</a></span>
-        </div>
-      </div>
-    </details>
+        <!-- experience.json -->
+        <section class="filepage" id="file-experience" data-lang="JSON">
+<div class="line"><span class="op">[</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">"org"</span><span class="op">:</span>   <span class="s">"Eli Lilly"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"role"</span><span class="op">:</span>  <span class="s">"AI Fellow — LRL Finance Analytics"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"years"</span><span class="op">:</span> <span class="s">"2026—"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"what"</span><span class="op">:</span>  <span class="s">"Build &amp; deploy multi-agent systems for financial analysis; own the path to prod."</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">"org"</span><span class="op">:</span>   <span class="s">"ReVenture AI"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"role"</span><span class="op">:</span>  <span class="s">"AI Engineer (led intern team)"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"years"</span><span class="op">:</span> <span class="s">"2025"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"what"</span><span class="op">:</span>  <span class="s">"Led the outbound sales agent — qualification + four-way routing, CRM + telephony."</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">"org"</span><span class="op">:</span>   <span class="s">"Outlier AI"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"role"</span><span class="op">:</span>  <span class="s">"Generative AI Trainer"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"years"</span><span class="op">:</span> <span class="s">"2024"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"what"</span><span class="op">:</span>  <span class="s">"Ranked LLM outputs on math &amp; Python (RLHF-style) to improve quality."</span></div>
+<div class="line">  <span class="op">},</span></div>
+<div class="line">  <span class="op">{</span></div>
+<div class="line">    <span class="prop">"org"</span><span class="op">:</span>   <span class="s">"Purdue University"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"role"</span><span class="op">:</span>  <span class="s">"TA — ECE 368, Data Structures &amp; Algorithms"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"years"</span><span class="op">:</span> <span class="s">"2025"</span><span class="op">,</span></div>
+<div class="line">    <span class="prop">"what"</span><span class="op">:</span>  <span class="s">"Mentored students through trees, graphs, DP &amp; memory management in C."</span></div>
+<div class="line">  <span class="op">}</span></div>
+<div class="line"><span class="op">]</span></div>
+        </section>
 
-    <details class="item reveal">
-      <summary>
-        <span class="it-name">Outbound Sales Agent</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">Multi-agent · LLM · Telephony</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">An agent that qualifies a lead and decides what to do next.</p>
-        <div class="it-desc">
-          A fully automated outbound sales agent: voice calls with synthesized speech, dynamic qualification, and four-way routing — close, book a meeting, warm follow-up, or nurture — wired into CRM and email. Built at ReVenture AI.
-          <span class="repo">Private — walkthrough on request</span>
-        </div>
-      </div>
-    </details>
+        <!-- stack.ts -->
+        <section class="filepage" id="file-stack" data-lang="TypeScript">
+<div class="line"><span class="k">export const</span> <span class="prop">stack</span> <span class="op">= {</span></div>
+<div class="line">  <span class="prop">languages</span><span class="op">:</span>  <span class="op">[</span><span class="s">"Python"</span><span class="op">,</span> <span class="s">"Rust"</span><span class="op">,</span> <span class="s">"C/C++"</span><span class="op">,</span> <span class="s">"SQL"</span><span class="op">,</span> <span class="s">"TypeScript"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">agenticAI</span><span class="op">:</span>  <span class="op">[</span><span class="s">"multi-agent"</span><span class="op">,</span> <span class="s">"RAG/GraphRAG"</span><span class="op">,</span> <span class="s">"prompt eng"</span><span class="op">,</span> <span class="s">"RLHF eval"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">ml</span><span class="op">:</span>         <span class="op">[</span><span class="s">"neural nets"</span><span class="op">,</span> <span class="s">"decision trees"</span><span class="op">,</span> <span class="s">"CV"</span><span class="op">,</span> <span class="s">"data mining"</span><span class="op">,</span> <span class="s">"NLP"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">dataCloud</span><span class="op">:</span>  <span class="op">[</span><span class="s">"GCP (Pub/Sub, Scheduler)"</span><span class="op">,</span> <span class="s">"Microsoft Fabric"</span><span class="op">,</span> <span class="s">"Denodo"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">ship</span><span class="op">:</span>       <span class="op">[</span><span class="s">"GitHub Actions / CI-CD"</span><span class="op">,</span> <span class="s">"Docker"</span><span class="op">,</span> <span class="s">"OIDC"</span><span class="op">],</span></div>
+<div class="line">  <span class="prop">financeBI</span><span class="op">:</span>  <span class="op">[</span><span class="s">"Power BI"</span><span class="op">,</span> <span class="s">"FactSet"</span><span class="op">,</span> <span class="s">"PitchBook"</span><span class="op">,</span> <span class="s">"variance decomp"</span><span class="op">],</span></div>
+<div class="line"><span class="op">};</span></div>
+        </section>
 
-    <details class="item reveal">
-      <summary>
-        <span class="it-name">Malicious Activity Predictor</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">Data mining · Anomaly detection</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Flagging threats in high-dimensional data before they escalate.</p>
-        <div class="it-desc">
-          A data-mining model that detects malicious patterns across high-dimensional datasets, surfacing security anomalies early enough to act on.
-          <span class="repo">↗ <a href="https://github.com/i4rushi/Malicious-Activity-Prediction" target="_blank" rel="noopener">github.com/i4rushi/Malicious-Activity-Prediction</a></span>
-        </div>
-      </div>
-    </details>
+        <!-- contact.md -->
+        <section class="filepage" id="file-contact" data-lang="Markdown">
+<div class="line h1"><span class="c">#</span> <span class="mh">Get in touch</span></div>
+<div class="line"> </div>
+<div class="line"><span class="mb">Let's build something that ships.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="op">-</span> email    <a class="lnk" href="mailto:arushigupt.23@gmail.com">arushigupt.23@gmail.com</a></div>
+<div class="line"><span class="op">-</span> github   <a class="lnk" href="https://github.com/i4rushi" target="_blank" rel="noopener">github.com/i4rushi</a></div>
+<div class="line"><span class="op">-</span> linkedin <a class="lnk" href="https://linkedin.com/in/arushig05" target="_blank" rel="noopener">linkedin.com/in/arushig05</a></div>
+<div class="line"> </div>
+<div class="line"><span class="c">&lt;!-- résumé in the sidebar: resume.pdf --&gt;</span></div>
+        </section>
 
-    <p class="alsobuilt reveal">
-      <b>Also built:</b> neural nets &amp; decision trees from scratch · a Duckietown self-driving stack (ROS + PID + computer vision) · speech-to-text on Raspberry Pi · an OCR receipt → budget pipeline.
-    </p>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="num">03</span><h2>Experience</h2><span class="line"></span></div>
-
-    <details class="item exp reveal" open>
-      <summary>
-        <span class="it-name">Eli Lilly</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">AI Fellow · 2026—</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">LRL Finance Analytics</p>
-        <div class="it-desc">Build and deploy multi-agent systems that automate financial analysis, pairing LLM reasoning with deterministic code for the math — and own the path to production, from CI/CD to deployment.</div>
-      </div>
-    </details>
-
-    <details class="item exp reveal">
-      <summary>
-        <span class="it-name">ReVenture AI</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">AI Engineer · 2025</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Led the intern team</p>
-        <div class="it-desc">Led development of the outbound sales agent above — multi-step LLM pipeline for qualification, conversation, and four-way action routing, integrated with CRM and telephony.</div>
-      </div>
-    </details>
-
-    <details class="item exp reveal">
-      <summary>
-        <span class="it-name">Outlier AI</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">Gen-AI Trainer · 2024</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Math &amp; Python, RLHF-style</p>
-        <div class="it-desc">Evaluated and ranked LLM outputs on calculus, linear algebra, proofs in LaTeX, and Python implementations to improve model quality.</div>
-      </div>
-    </details>
-
-    <details class="item exp reveal">
-      <summary>
-        <span class="it-name">Purdue University</span>
-        <span class="it-lead"></span>
-        <span class="it-tag">TA, ECE 368 · 2025</span>
-        <span class="it-mark">+</span>
-      </summary>
-      <div class="it-body">
-        <p class="it-note">Data Structures &amp; Algorithms</p>
-        <div class="it-desc">Mentored students through trees, graphs, dynamic programming, and memory management in C; ran weekly problem sessions and debugged 300-level coursework.</div>
-      </div>
-    </details>
-  </div>
-</section>
-
-<!-- STACK -->
-<section id="stack">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="num">04</span><h2>Stack</h2><span class="line"></span></div>
-    <div class="stack reveal">
-      <div class="col">
-        <div class="lbl">Languages</div>
-        <ul><li>Python</li><li>Rust</li><li>C / C++</li><li>SQL</li><li>TypeScript</li></ul>
-      </div>
-      <div class="col">
-        <div class="lbl">Agentic AI &amp; LLMs</div>
-        <ul><li>Multi-agent systems</li><li>RAG / GraphRAG</li><li>Prompt engineering</li><li>Model eval (RLHF)</li></ul>
-      </div>
-      <div class="col">
-        <div class="lbl">Machine Learning</div>
-        <ul><li>Neural networks</li><li>Decision trees</li><li>Computer vision</li><li>Data mining · NLP</li></ul>
-      </div>
-      <div class="col">
-        <div class="lbl">Data &amp; Cloud</div>
-        <ul><li>GCP (Pub/Sub, Scheduler)</li><li>Microsoft Fabric</li><li>Denodo</li><li>Real-time pipelines</li></ul>
-      </div>
-      <div class="col">
-        <div class="lbl">Ship</div>
-        <ul><li>GitHub Actions / CI-CD</li><li>Docker</li><li>OIDC auth</li><li>Git</li></ul>
-      </div>
-      <div class="col">
-        <div class="lbl">Finance &amp; BI</div>
-        <ul><li>Power BI</li><li>FactSet</li><li>PitchBook</li><li>Variance decomposition</li></ul>
       </div>
     </div>
-  </div>
-</section>
+  </main>
 
-<!-- CONTACT -->
-<section id="contact" class="contact" style="border-bottom:none;">
-  <div class="wrap">
-    <div class="sec-head reveal"><span class="num">05</span><h2 style="font-size:clamp(22px,3vw,30px);">Contact</h2><span class="line"></span></div>
-    <h2 class="reveal">Let's build something<br>that ships<span class="dot">.</span></h2>
-    <div class="links reveal">
-      <a href="mailto:arushigupt.23@gmail.com">✉ arushigupt.23@gmail.com</a>
-      <a href="https://github.com/i4rushi" target="_blank" rel="noopener">↗ github.com/i4rushi</a>
-      <a href="https://linkedin.com/in/arushig05" target="_blank" rel="noopener">↗ linkedin.com/in/arushig05</a>
-    </div>
-  </div>
-</section>
+  <!-- STATUS BAR -->
+  <footer class="status">
+    <a class="seg branch btn" href="https://github.com/i4rushi" target="_blank" rel="noopener" title="github.com/i4rushi">⎇ main</a>
+    <span class="seg">↻ 0↓ 0↑</span>
+    <span class="grow"></span>
+    <span class="seg">Boston, MA</span>
+    <span class="seg">Ln 1, Col 1</span>
+    <span class="seg">Spaces: 2</span>
+    <span class="seg">UTF-8</span>
+    <span class="seg" id="langmode">Markdown</span>
+    <span class="seg">shipping ⚡</span>
+  </footer>
+</div>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Arushi Gupta</span>
-    <span>Built from scratch · Boston → Indianapolis</span>
-  </div>
-</footer>
+<!-- scrim for mobile sidebar -->
+<div class="scrim" id="scrim"></div>
+
+<!-- COMMAND PALETTE -->
+<div class="palette-bg" id="palbg"></div>
+<div class="palette" id="palette" style="display:none;" role="dialog" aria-label="Command palette">
+  <input id="palinput" type="text" placeholder="Go to file…  (try 'work')" autocomplete="off" />
+  <div class="pal-list" id="pallist"></div>
+</div>
 
 <script>
-  // mobile nav
-  const tgl = document.getElementById('navtoggle');
-  const links = document.getElementById('navlinks');
-  tgl.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    tgl.setAttribute('aria-expanded', open);
+  const FILES = [
+    {id:'readme',     name:'README.md',        lang:'Markdown'},
+    {id:'profile',    name:'profile.ts',       lang:'TypeScript'},
+    {id:'work',       name:'work.ts',          lang:'TypeScript'},
+    {id:'experience', name:'experience.json',  lang:'JSON'},
+    {id:'stack',      name:'stack.ts',         lang:'TypeScript'},
+    {id:'contact',    name:'contact.md',       lang:'Markdown'},
+  ];
+
+  const crumb = document.getElementById('crumb');
+  const langmode = document.getElementById('langmode');
+
+  function openFile(id){
+    const f = FILES.find(x=>x.id===id); if(!f) return;
+    document.querySelectorAll('.filepage').forEach(p=>p.classList.remove('show'));
+    document.getElementById('file-'+id).classList.add('show');
+    document.querySelectorAll('.file[data-file]').forEach(b=>b.classList.toggle('active',b.dataset.file===id));
+    document.querySelectorAll('.tab[data-file]').forEach(b=>b.classList.toggle('active',b.dataset.file===id));
+    crumb.textContent = f.name;
+    langmode.textContent = f.lang;
+    document.querySelector('.editor-body').scrollTop = 0;
+    closeSidebar();
+  }
+
+  document.querySelectorAll('.file[data-file], .tab[data-file]').forEach(b=>{
+    b.addEventListener('click', ()=>openFile(b.dataset.file));
   });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('open'); tgl.setAttribute('aria-expanded', false);
-  }));
 
-  // scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.16 });
-  document.querySelectorAll('.reveal, .sec-head').forEach(el => io.observe(el));
+  /* mobile sidebar */
+  const sidebar=document.getElementById('sidebar'), scrim=document.getElementById('scrim');
+  function closeSidebar(){sidebar.classList.remove('open');scrim.classList.remove('open');}
+  document.getElementById('hamb').addEventListener('click',()=>{
+    sidebar.classList.toggle('open');scrim.classList.toggle('open');
+  });
+  scrim.addEventListener('click',closeSidebar);
+
+  /* command palette */
+  const palbg=document.getElementById('palbg'), palette=document.getElementById('palette');
+  const palinput=document.getElementById('palinput'), pallist=document.getElementById('pallist');
+  let sel=0, filtered=FILES.slice();
+
+  function renderPal(){
+    pallist.innerHTML='';
+    filtered.forEach((f,i)=>{
+      const d=document.createElement('div');
+      d.className='pal-item'+(i===sel?' sel':'');
+      d.innerHTML=`<span>${f.name}</span><span class="hint">${f.lang}</span>`;
+      d.addEventListener('click',()=>{openFile(f.id);closePal();});
+      pallist.appendChild(d);
+    });
+  }
+  function openPal(){
+    palbg.classList.add('open');palette.style.display='block';
+    palinput.value='';filtered=FILES.slice();sel=0;renderPal();palinput.focus();
+  }
+  function closePal(){palbg.classList.remove('open');palette.style.display='none';}
+  palbg.addEventListener('click',closePal);
+  document.getElementById('act-search').addEventListener('click',openPal);
+  document.getElementById('act-settings').addEventListener('click',openPal);
+
+  palinput.addEventListener('input',()=>{
+    const q=palinput.value.toLowerCase();
+    filtered=FILES.filter(f=>f.name.toLowerCase().includes(q));
+    sel=0;renderPal();
+  });
+  palinput.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,filtered.length-1);renderPal();}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);renderPal();}
+    else if(e.key==='Enter'){if(filtered[sel]){openFile(filtered[sel].id);closePal();}}
+    else if(e.key==='Escape'){closePal();}
+  });
+  document.addEventListener('keydown',e=>{
+    if((e.metaKey||e.ctrlKey)&&(e.key==='k'||e.key==='p')){e.preventDefault();openPal();}
+    else if(e.key==='Escape'){closePal();}
+  });
 </script>
-
 </body>
 </html>
